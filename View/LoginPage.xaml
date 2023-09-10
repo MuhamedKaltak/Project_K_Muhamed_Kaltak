@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Kafic.View.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="LoginPage"
+    Background="White">
+
+
+    <Grid>
+        <VerticalStackLayout Margin="30" VerticalOptions="Center">
+            <Label
+                FontSize="45"
+                HorizontalOptions="Center"
+                Text="Kafic" />
+
+            <Label
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="SignalR" />
+
+            <Frame
+                Margin="0,45,0,0"
+                Padding="10,0,10,0"
+                BorderColor="Transparent">
+                <Entry
+                    Placeholder="User Name"
+                    ReturnType="Go"
+                    TextColor="Black" />
+            </Frame>
+
+            <Frame
+                Margin="0,10,0,0"
+                Padding="10,0,10,0"
+                BorderColor="Transparent">
+                <Entry
+                    Placeholder="Password"
+                    ReturnType="Go"
+                    TextColor="Black" />
+            </Frame>
+
+
+        </VerticalStackLayout>
+    </Grid>
+
+
+</ContentPage>
