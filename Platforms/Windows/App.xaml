@@ -1,8 +1,6 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="Kafic.WinUI.App"
+    x:Class="Project_K.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:Kafic.WinUI">
-
-</maui:MauiWinUIApplication>
+    xmlns:local="using:Project_K.WinUI"
+    xmlns:maui="using:Microsoft.Maui" />

@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Kafic
+namespace Project_K
 {
     public class Program
     {

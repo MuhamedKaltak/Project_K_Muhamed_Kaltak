@@ -1,4 +1,4 @@
-﻿namespace Kafic
+﻿namespace Project_K
 {
     public partial class App : Application
     {

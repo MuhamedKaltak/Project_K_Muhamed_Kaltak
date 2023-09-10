@@ -1,4 +1,4 @@
-namespace Kafic.View;
+namespace Project_K.View;
 
 public partial class LoginPage : ContentPage
 {

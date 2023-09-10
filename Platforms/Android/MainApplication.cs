@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Kafic
+namespace Project_K
 {
     [Application]
     public class MainApplication : MauiApplication

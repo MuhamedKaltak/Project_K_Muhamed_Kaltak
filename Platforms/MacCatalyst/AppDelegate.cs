@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Kafic
+namespace Project_K
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

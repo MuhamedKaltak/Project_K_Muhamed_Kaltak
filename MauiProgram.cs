@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Kafic
+namespace Project_K
 {
     public static class MauiProgram
     {
