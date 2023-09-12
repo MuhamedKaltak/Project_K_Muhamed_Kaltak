@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
-    Title="RegisterPage">
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    Title="RegisterPage"
+    x:DataType="viewmodel:RegisterViewModel">
 
     <Grid RowDefinitions="*,Auto">
 
@@ -35,7 +37,10 @@
                 <Frame Style="{StaticResource RegisterFrame}">
 
 
-                    <Entry Placeholder="Enter a password" Style="{StaticResource RegisterEntry}" />
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Enter a password"
+                        Style="{StaticResource RegisterEntry}" />
                 </Frame>
             </HorizontalStackLayout>
 
@@ -46,7 +51,10 @@
                 <Frame Style="{StaticResource RegisterFrame}">
 
 
-                    <Entry Placeholder="Confirm the password" Style="{StaticResource RegisterEntry}" />
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Confirm the password"
+                        Style="{StaticResource RegisterEntry}" />
                 </Frame>
             </HorizontalStackLayout>
 
@@ -93,7 +101,10 @@
             Margin="0,0,0,20"
             Style="{StaticResource RegisterHorizontalStack}">
 
-            <Button Style="{StaticResource buttonGeneral}" Text="Cancel" />
+            <Button
+                Command="{Binding NavigateToLoginPageCommand}"
+                Style="{StaticResource buttonGeneral}"
+                Text="Cancel" />
             <Button
                 Margin="20,0,0,0"
                 Style="{StaticResource buttonGeneral}"

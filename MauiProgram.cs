@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Project_K.View;
+using Project_K.ViewModel;
 
 namespace Project_K
 {
@@ -21,6 +23,13 @@ namespace Project_K
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegisterPage>();
 
             return builder.Build();
         }
