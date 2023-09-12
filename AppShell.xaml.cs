@@ -1,10 +1,14 @@
-﻿namespace Project_K
+﻿using Project_K.View;
+
+namespace Project_K
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         }
     }
 }

@@ -6,9 +6,12 @@
     xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
     Title="RegisterPage">
 
-    <Grid>
+    <Grid RowDefinitions="*,Auto">
 
-        <VerticalStackLayout Margin="30" HorizontalOptions="Center">
+        <VerticalStackLayout
+            Grid.Row="0"
+            Margin="30"
+            HorizontalOptions="Center">
             <Label
                 FontSize="30"
                 HorizontalOptions="Center"
@@ -36,8 +39,67 @@
                 </Frame>
             </HorizontalStackLayout>
 
+            <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
+
+                <Frame Style="{StaticResource RegisterFrame}">
+
+
+                    <Entry Placeholder="Confirm the password" Style="{StaticResource RegisterEntry}" />
+                </Frame>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+
+                <Frame Style="{StaticResource RegisterFrame}">
+
+
+                    <Entry Placeholder="Enter your name" Style="{StaticResource RegisterEntry}" />
+                </Frame>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+
+                <Frame Style="{StaticResource RegisterFrame}">
+
+
+                    <Entry Placeholder="Enter your last name" Style="{StaticResource RegisterEntry}" />
+                </Frame>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
+
+                <Frame Style="{StaticResource RegisterFrame}">
+
+
+                    <Entry Placeholder="Enter your email adress" Style="{StaticResource RegisterEntry}" />
+                </Frame>
+            </HorizontalStackLayout>
+
+
+
 
         </VerticalStackLayout>
+
+        <HorizontalStackLayout
+            Grid.Row="1"
+            Margin="0,0,0,20"
+            Style="{StaticResource RegisterHorizontalStack}">
+
+            <Button Style="{StaticResource buttonGeneral}" Text="Cancel" />
+            <Button
+                Margin="20,0,0,0"
+                Style="{StaticResource buttonGeneral}"
+                Text="Register" />
+
+        </HorizontalStackLayout>
 
     </Grid>
 
