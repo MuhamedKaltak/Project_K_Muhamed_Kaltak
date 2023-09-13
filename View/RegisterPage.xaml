@@ -21,73 +21,73 @@
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.User}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.User}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
-                    <Entry Placeholder="Enter a username" Style="{StaticResource RegisterEntry}" />
+                    <Entry Placeholder="Enter a username" Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
                     <Entry
                         IsPassword="True"
                         Placeholder="Enter a password"
-                        Style="{StaticResource RegisterEntry}" />
+                        Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
                     <Entry
                         IsPassword="True"
                         Placeholder="Confirm the password"
-                        Style="{StaticResource RegisterEntry}" />
+                        Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
-                    <Entry Placeholder="Enter your name" Style="{StaticResource RegisterEntry}" />
+                    <Entry Placeholder="Enter your name" Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
-                    <Entry Placeholder="Enter your last name" Style="{StaticResource RegisterEntry}" />
+                    <Entry Placeholder="Enter your last name" Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
 
-                <Label Style="{StaticResource RegisterLabelFontAwesomeIcon}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
+                <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
 
-                <Frame Style="{StaticResource RegisterFrame}">
+                <Frame Style="{StaticResource Frame_General}">
 
 
-                    <Entry Placeholder="Enter your email adress" Style="{StaticResource RegisterEntry}" />
+                    <Entry Placeholder="Enter your email adress" Style="{StaticResource Entry_General}" />
                 </Frame>
             </HorizontalStackLayout>
 
@@ -103,11 +103,11 @@
 
             <Button
                 Command="{Binding NavigateToLoginPageCommand}"
-                Style="{StaticResource buttonGeneral}"
+                Style="{StaticResource Button_General}"
                 Text="Cancel" />
             <Button
                 Margin="20,0,0,0"
-                Style="{StaticResource buttonGeneral}"
+                Style="{StaticResource Button_General}"
                 Text="Register" />
 
         </HorizontalStackLayout>

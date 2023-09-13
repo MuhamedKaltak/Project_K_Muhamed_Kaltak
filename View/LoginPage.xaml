@@ -15,38 +15,26 @@
             <Label
                 FontSize="45"
                 HorizontalOptions="Center"
-                Text="Projekt K" />
+                Text="Project_K" />
 
             <Label
                 FontSize="20"
                 HorizontalOptions="Center"
                 Text="SignalR" />
 
-            <Frame
-                Margin="0,45,0,0"
-                Padding="10,0,10,0"
-                BorderColor="Transparent">
+            <Frame Margin="0,45,0,0" Style="{StaticResource Frame_General}">
                 <Entry
                     Placeholder="Username"
                     ReturnType="Go"
                     TextColor="{StaticResource Black}" />
             </Frame>
 
-            <Frame
-                Margin="0,10,0,0"
-                Padding="10,0,10,0"
-                BorderColor="Transparent">
-                <Entry
-                    Placeholder="Password"
-                    ReturnType="Go"
-                    TextColor="{StaticResource Black}" />
+            <Frame Margin="0,10,0,0" Style="{StaticResource Frame_General}">
+                <Entry Placeholder="Password" Style="{StaticResource Entry_General}" />
             </Frame>
 
             <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="Center">
-                <Label
-                    Margin="0,0,0,0"
-                    Text="Forgot Password?"
-                    TextColor="{StaticResource Blue100Accent}">
+                <Label Style="{StaticResource Label_Link}" Text="Forgot Password?">
 
                     <!--  Placeholder.  TODO: Sätt in nya pages gällande hantering av att åretställa lösenord, samma för användarnamn. Ta från bank projektet  -->
                     <Label.GestureRecognizers>
@@ -56,13 +44,13 @@
 
                 <Label
                     Margin="70,0,0,0"
-                    Text="Forgot Username?"
-                    TextColor="{StaticResource Blue100Accent}" />
+                    Style="{StaticResource Label_Link}"
+                    Text="Forgot Username?" />
             </HorizontalStackLayout>
 
             <Button
                 Margin="0,50,0,0"
-                Style="{StaticResource buttonGeneral}"
+                Style="{StaticResource Button_General}"
                 Text="Login" />
 
             <HorizontalStackLayout Margin="0,70,0,0" HorizontalOptions="Center">
@@ -82,7 +70,7 @@
             <Button
                 Margin="0,60,0,0"
                 Command="{Binding NavigateToRegisterPageCommand}"
-                Style="{StaticResource buttonGeneral}"
+                Style="{StaticResource Button_General}"
                 Text="Register" />
 
             <!--<HorizontalStackLayout Margin="0,30,0,0" HorizontalOptions="Center">

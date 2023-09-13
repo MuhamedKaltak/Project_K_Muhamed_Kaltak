@@ -2,40 +2,59 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+
     <Style x:Key="loginImage" TargetType="Image">
         <Setter Property="Source" Value="dotnet_bot.svg" />
         <Setter Property="HeightRequest" Value="32" />
         <Setter Property="WidthRequest" Value="32" />
     </Style>
 
-    <Style x:Key="buttonGeneral" TargetType="Button">
+
+    <Style x:Key="Button_General" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource Yellow100Accent}" />
         <Setter Property="Text" Value="PLACEHOLDER" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
         <Setter Property="WidthRequest" Value="160" />
     </Style>
 
+
     <Style x:Key="RegisterHorizontalStack" TargetType="HorizontalStackLayout">
         <Setter Property="Margin" Value="0,40,0,0" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
-    <Style x:Key="RegisterLabelFontAwesomeIcon" TargetType="Label">
+
+    <Style x:Key="Label_FontAwesomeIcon_Solid" TargetType="Label">
         <Setter Property="FontFamily" Value="FAS" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
-    <Style x:Key="RegisterFrame" TargetType="Frame">
+
+    <Style x:Key="Frame_General" TargetType="Frame">
         <Setter Property="Padding" Value="10,0,10,0" />
         <Setter Property="BorderColor" Value="Transparent" />
         <Setter Property="WidthRequest" Value="320" />
     </Style>
 
-    <Style x:Key="RegisterEntry" TargetType="Entry">
+
+    <Style x:Key="Entry_General" TargetType="Entry">
+        <Setter Property="ReturnType" Value="Go" />
         <Setter Property="Placeholder" Value="PLACEHOLDER" />
         <Setter Property="ReturnType" Value="{StaticResource Black}" />
     </Style>
+
+    <Style x:Key="Label_Link" TargetType="Label">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="TextColor" Value="{StaticResource Blue100Accent}" />
+        <Setter Property="Text" Value="PLACEHOLDER" />
+    </Style>
+
+
+
+
+
+
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
