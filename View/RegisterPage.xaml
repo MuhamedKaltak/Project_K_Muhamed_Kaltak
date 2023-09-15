@@ -7,7 +7,12 @@
     xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
     Title="RegisterPage"
     x:DataType="viewmodel:RegisterViewModel">
-
+    <!--
+        FINNS ERROR NÄR MAN ANVÄNDER SIG AV FRAMES I SIN XAML FIL OCH DÄR PAGEN ÄR AV ADDSINGLETON TYP, APPEN KOMMER CRASHA NÄR DU NAVIGARER IN OCH UT.
+        WORKAROUNDS INNAN MICROSOFT FIXAR BUG: 1 -> ANVÄND DIG ISTÄLLET AV BORDER. 2-> LÅT PAGEN VARA ADDTRANSIENT
+        
+        https://github.com/dotnet/maui/issues/13762
+    -->
     <ScrollView>
         <Grid RowDefinitions="*,Auto">
 
