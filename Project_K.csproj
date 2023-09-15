@@ -12,10 +12,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Kafic</ApplicationTitle>
+		<ApplicationTitle>Project_K</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.kafic</ApplicationId>
+		<ApplicationId>com.companyname.Project_K</ApplicationId>
 		<ApplicationIdGuid>c33bc3f7-b427-442c-a476-0ba31db3cc16</ApplicationIdGuid>
 
 		<!-- Versions -->

@@ -24,6 +24,7 @@ namespace Project_K
 		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
 
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();

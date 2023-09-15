@@ -23,6 +23,14 @@
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
+    <Style x:Key="CardView" TargetType="Frame">
+        <Setter Property="BorderColor" Value="#DDDDDD" />
+        <Setter Property="HasShadow" Value="{OnPlatform iOS=false, MacCatalyst=false, Default=true}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource CardBackgroundDark}}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="IsClippedToBounds" Value="True" />
+    </Style>
 
     <Style x:Key="Label_FontAwesomeIcon_Solid" TargetType="Label">
         <Setter Property="FontFamily" Value="FAS" />
