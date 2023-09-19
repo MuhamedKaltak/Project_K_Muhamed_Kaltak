@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Project_K.DataAccess;
 using Project_K.View;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,9 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task NavigateToLoginPageAsync()
         {
-           await Shell.Current.GoToAsync("..",true);
+            await DatabaseManager.AddUserTEST();
+
+            await Shell.Current.GoToAsync("..",true);
         }
 
         [RelayCommand]
