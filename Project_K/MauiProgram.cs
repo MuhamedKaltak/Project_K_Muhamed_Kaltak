@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Project_K.Services;
 using Project_K.View;
 using Project_K.ViewModel;
 
@@ -23,6 +24,8 @@ namespace Project_K
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddTransient<RegisterService>();
 
             builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
 

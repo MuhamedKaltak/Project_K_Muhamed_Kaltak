@@ -22,31 +22,23 @@ namespace Project_K.DataAccess
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
             await Database.CreateTableAsync<User>();
-            await Database.CreateTableAsync<TEST>();
         }
 
-        public static async Task AddUserTEST()
+        public static async Task AddUser(string username, string password, string name, string lastName, string email)
         {
             await Init();
 
             var user = new User
             {
-                Username = "TestUsername",
-                Password = "password",
-                Name = "Test",
-                LastName = "Test",
-                Email = "Test"
+                Username = username,
+                Password = password,
+                Name = name,
+                LastName = lastName,
+                Email = email
             };
 
             await Database.InsertAsync(user);
 
-            var test = new TEST
-            {
-                UsernameTEST = "TestUsername"
-                
-            };
-
-            await Database.InsertAsync(test);
         }
     }
 }
