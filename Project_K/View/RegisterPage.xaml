@@ -39,6 +39,7 @@
                     <Button
                         BackgroundColor="Black"
                         Command="{Binding PickProfilePictureCommand}"
+                        IsEnabled="{Binding IsNotBusy}"
                         Text="Select a profile picture for your account" />
                 </Frame>
 
@@ -149,6 +150,12 @@
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
+
+            <ActivityIndicator
+                HorizontalOptions="FillAndExpand"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center" />
 
         </Grid>
     </ScrollView>

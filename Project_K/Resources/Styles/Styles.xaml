@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    x:DataType="viewmodel:BaseViewModel">
 
 
     <Style x:Key="loginImage" TargetType="Image">
@@ -11,6 +15,7 @@
 
 
     <Style x:Key="Button_General" TargetType="Button">
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
         <Setter Property="Background" Value="{StaticResource Yellow100Accent}" />
         <Setter Property="Text" Value="PLACEHOLDER" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
@@ -47,6 +52,7 @@
 
 
     <Style x:Key="Entry_General" TargetType="Entry">
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
         <Setter Property="ReturnType" Value="Go" />
         <Setter Property="Placeholder" Value="PLACEHOLDER" />
         <Setter Property="ReturnType" Value="{StaticResource Black}" />

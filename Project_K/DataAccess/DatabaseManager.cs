@@ -24,18 +24,9 @@ namespace Project_K.DataAccess
             await Database.CreateTableAsync<User>();
         }
 
-        public static async Task AddUser(string username, string password, string name, string lastName, string email)
+        public static async Task AddUser(User user)
         {
             await Init();
-
-            var user = new User
-            {
-                Username = username,
-                Password = password,
-                Name = name,
-                LastName = lastName,
-                Email = email
-            };
 
             await Database.InsertAsync(user);
 

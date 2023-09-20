@@ -66,8 +66,11 @@ namespace Project_K.ViewModel
             try
             {
                 IsBusy = true;
+
                 await registerService.RegisterUserToDatabase(username,password,name,lastName,email);
+
                 await NavigateToLoginPageAsync();
+
             }
             catch (Exception ex)
             {
