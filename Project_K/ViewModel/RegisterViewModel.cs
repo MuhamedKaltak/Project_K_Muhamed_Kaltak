@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Project_K.DataAccess;
+using Project_K.Model;
 using Project_K.Services;
 using Project_K.View;
 using System;
@@ -31,6 +32,7 @@ namespace Project_K.ViewModel
         public string lastName { get; set; }
         public string email { get; set; }
 
+
         public RegisterViewModel(RegisterService registerService ,IMediaPicker mediaPicker)
         {
             this.registerService = registerService;
@@ -52,7 +54,7 @@ namespace Project_K.ViewModel
 
             if (file == null) return;
 
-            var byteArray = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databas framöver
+            var byteArray = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databasen framöver
 
             ImageToShowSource = ImageSource.FromStream(() => new MemoryStream(byteArray));
         }
@@ -63,11 +65,23 @@ namespace Project_K.ViewModel
             if (IsBusy)
                 return;
 
+            if (!await registerService.CheckValidFields(username, password, confirmPassword, name, lastName, email))
+                return;
+            
+            User user = new User
+            {
+                Username = username,
+                Password = password,
+                Email = email,
+                Name = name,
+                LastName = lastName
+            };
+
             try
             {
                 IsBusy = true;
-
-                await registerService.RegisterUserToDatabase(username,password,name,lastName,email);
+                
+                await registerService.RegisterUserToDatabase(user);
 
                 await NavigateToLoginPageAsync();
 
