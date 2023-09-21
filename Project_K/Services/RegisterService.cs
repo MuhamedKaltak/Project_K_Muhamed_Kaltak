@@ -20,62 +20,62 @@ namespace Project_K.Services
         {
             if (string.IsNullOrEmpty(username))
             {
-                await ErrorMessageEmpty("username");
+                await ErrorMessageEmpty("Username");
                 return false;
             }
             else if (username.Contains(" "))
             {
-                await ErrorMessageWhitspace("username");
+                await ErrorMessageWhitspace("Username");
                 return false;
             }
             else if (string.IsNullOrEmpty(password))
             {
-                await ErrorMessageEmpty("password");
+                await ErrorMessageEmpty("Password");
                 return false;
             }
             else if (password.Contains(" "))
             {
-                await ErrorMessageWhitspace("password");
+                await ErrorMessageWhitspace("Password");
                 return false;
             }
             else if (!password.Equals(confirmPassword))
             {
-                await Shell.Current.DisplayAlert("Error!", "ERROR: the passwords do not match", "OK");
+                await Shell.Current.DisplayAlert("Error!", "The passwords do not match", "OK");
                 return false;
             }
             else if (string.IsNullOrEmpty(name))
             {
-                await ErrorMessageEmpty("name");
+                await ErrorMessageEmpty("Name");
                 return false;
             }
             else if (name.Contains(" "))
             {
-                await ErrorMessageWhitspace("name");
+                await ErrorMessageWhitspace("Name");
                 return false;
             }
             else if (string.IsNullOrEmpty(lastName))
             {
-                await ErrorMessageEmpty("lastName");
+                await ErrorMessageEmpty("Last name");
                 return false;
             }
             else if (lastName.Contains(" "))
             {
-                await ErrorMessageWhitspace("lastName");
+                await ErrorMessageWhitspace("Last name");
                 return false;
             }
             else if (string.IsNullOrEmpty(email))
             {
-                await ErrorMessageEmpty("email");
+                await ErrorMessageEmpty("Email");
                 return false;
             }
             else if (email.Contains(" "))
             {
-                await ErrorMessageWhitspace("email");
+                await ErrorMessageWhitspace("Email");
                 return false;
             }
             else if (!await IsEmailInValidFormat(email))
             {
-                await Shell.Current.DisplayAlert("Error!", "The email field is not in a valid format. 'abc@abc.se' ", "OK");
+                await Shell.Current.DisplayAlert("Error!", "The email field is not in a valid format. Should be in this format -> 'abc@abc.se' ", "OK");
                 return false;
             }
 
@@ -84,12 +84,12 @@ namespace Project_K.Services
 
         private async Task ErrorMessageEmpty(string field)
         {
-            await Shell.Current.DisplayAlert("Error!", $"ERROR: {field} field cannot be empty", "OK");
+            await Shell.Current.DisplayAlert("Error!", $"{field} field cannot be empty", "OK");
         }
 
         private async Task ErrorMessageWhitspace(string field)
         {
-            await Shell.Current.DisplayAlert("Error!", $"ERROR: {field} field cannot contain whitespaces", "OK");
+            await Shell.Current.DisplayAlert("Error!", $"{field} field cannot contain whitespaces", "OK");
         }
 
         private async Task<bool> IsEmailInValidFormat(string email)
