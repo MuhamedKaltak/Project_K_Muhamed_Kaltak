@@ -16,6 +16,7 @@ namespace Project_K.ViewModel
     public partial class RegisterViewModel : BaseViewModel
     {
         RegisterService registerService;
+        SecurityService securityService;
 
 
         IMediaPicker mediaPicker;
@@ -33,9 +34,10 @@ namespace Project_K.ViewModel
         public string email { get; set; }
 
 
-        public RegisterViewModel(RegisterService registerService ,IMediaPicker mediaPicker)
+        public RegisterViewModel(RegisterService registerService,SecurityService security ,IMediaPicker mediaPicker)
         {
             this.registerService = registerService;
+            this.securityService = security;
             this.mediaPicker = mediaPicker;
             imageToShowSource = "user.png";
         }
@@ -65,19 +67,23 @@ namespace Project_K.ViewModel
             if (IsBusy || !await registerService.CheckValidFields(username, password, confirmPassword, name, lastName, email) || await registerService.EmailAlreadyInUse(email))
                 return;
 
-            User user = new User
-            {
-                Username = username,
-                Password = password,
-                Email = email,
-                Name = name,
-                LastName = lastName
-            };
-
             try
             {
                 IsBusy = true;
-                
+
+                var salt = await securityService.GenerateRandomSalt(16);
+                var hashedPassword = await securityService.HashPassword(password,salt);
+
+                User user = new User
+                {
+                    Username = username,
+                    Password = hashedPassword,
+                    Name = name,
+                    LastName = lastName,
+                    Email = email,
+                    Salt = salt
+                };
+
                 await registerService.RegisterUserToDatabase(user);
 
                 await NavigateToLoginPageAsync();

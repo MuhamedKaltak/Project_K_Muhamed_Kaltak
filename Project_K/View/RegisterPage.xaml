@@ -151,11 +151,7 @@
 
             </VerticalStackLayout>
 
-            <ActivityIndicator
-                HorizontalOptions="FillAndExpand"
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center" />
+            <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
 
         </Grid>
     </ScrollView>

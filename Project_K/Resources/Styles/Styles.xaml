@@ -13,6 +13,13 @@
         <Setter Property="WidthRequest" Value="32" />
     </Style>
 
+    <Style x:Key="ActivityIndicator_General" TargetType="ActivityIndicator">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="IsRunning" Value="{Binding IsBusy}" />
+        <Setter Property="IsVisible" Value="{Binding IsBusy}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
 
     <Style x:Key="Button_General" TargetType="Button">
         <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />

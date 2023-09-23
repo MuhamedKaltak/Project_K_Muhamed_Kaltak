@@ -32,11 +32,18 @@ namespace Project_K.DataAccess
 
         }
 
+        public static async Task<User> GetUserByUsername(string username)
+        {
+            await Init();
+
+            return await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+        }
+
         public static async Task<bool> CheckExistingUser(string email)
         {
             await Init();
 
-            var user = await Database.Table<User>().FirstOrDefaultAsync(u=> u.Email == email);
+            var user = await Database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
                 return false;

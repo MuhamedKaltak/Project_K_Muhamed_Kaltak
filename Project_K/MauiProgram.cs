@@ -26,6 +26,8 @@ namespace Project_K
 #endif
 
             builder.Services.AddTransient<RegisterService>();
+            builder.Services.AddTransient<SecurityService>();
+            builder.Services.AddTransient<LoginService>();
 
             builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
 

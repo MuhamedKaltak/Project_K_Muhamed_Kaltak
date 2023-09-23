@@ -75,7 +75,7 @@ namespace Project_K.Services
             }
             else if (!await IsEmailInValidFormat(email))
             {
-                await Shell.Current.DisplayAlert("Error!", "The email field is not in a valid format. Should be in this format -> 'abc@abc.se' ", "OK");
+                await Shell.Current.DisplayAlert("Error!", "The email field is not in a valid format. Should be in this example format -> 'abc@abc.se' ", "OK");
                 return false;
             }
 

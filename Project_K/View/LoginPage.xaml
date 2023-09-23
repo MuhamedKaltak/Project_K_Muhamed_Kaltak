@@ -25,12 +25,15 @@
             <Frame Margin="0,45,0,0" Style="{StaticResource Frame_General}">
                 <Entry
                     Placeholder="Username"
-                    ReturnType="Go"
-                    TextColor="{StaticResource Black}" />
+                    Style="{StaticResource Entry_General}"
+                    Text="{Binding username}" />
             </Frame>
 
             <Frame Margin="0,10,0,0" Style="{StaticResource Frame_General}">
-                <Entry Placeholder="Password" Style="{StaticResource Entry_General}" />
+                <Entry
+                    Placeholder="Password"
+                    Style="{StaticResource Entry_General}"
+                    Text="{Binding password}" />
             </Frame>
 
             <HorizontalStackLayout Margin="0,10,0,0" HorizontalOptions="Center">
@@ -50,6 +53,7 @@
 
             <Button
                 Margin="0,50,0,0"
+                Command="{Binding LoginCommand}"
                 Style="{StaticResource Button_General}"
                 Text="Login" />
 
@@ -92,6 +96,9 @@
             </HorizontalStackLayout>-->
 
         </VerticalStackLayout>
+
+        <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
+
     </Grid>
 
 
