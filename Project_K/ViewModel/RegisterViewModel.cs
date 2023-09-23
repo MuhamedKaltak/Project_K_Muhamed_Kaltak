@@ -62,12 +62,9 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy)
+            if (IsBusy || !await registerService.CheckValidFields(username, password, confirmPassword, name, lastName, email) || await registerService.EmailAlreadyInUse(email))
                 return;
 
-            if (!await registerService.CheckValidFields(username, password, confirmPassword, name, lastName, email))
-                return;
-            
             User user = new User
             {
                 Username = username,

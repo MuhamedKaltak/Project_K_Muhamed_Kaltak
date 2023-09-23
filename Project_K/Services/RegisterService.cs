@@ -82,6 +82,19 @@ namespace Project_K.Services
             return true;
         }
 
+        public async Task<bool> EmailAlreadyInUse(string email)
+        {
+            var emailInUse = await DatabaseManager.CheckExistingUser(email);
+
+            if (emailInUse)
+            {
+                await Shell.Current.DisplayAlert("Error!", "Could not create the account", "OK");
+                return true;
+            }
+
+            return false;
+        }
+
         private async Task ErrorMessageEmpty(string field)
         {
             await Shell.Current.DisplayAlert("Error!", $"{field} field cannot be empty", "OK");

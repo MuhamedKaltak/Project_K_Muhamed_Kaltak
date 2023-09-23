@@ -31,5 +31,17 @@ namespace Project_K.DataAccess
             await Database.InsertAsync(user);
 
         }
+
+        public static async Task<bool> CheckExistingUser(string email)
+        {
+            await Init();
+
+            var user = await Database.Table<User>().FirstOrDefaultAsync(u=> u.Email == email);
+
+            if (user == null)
+                return false;
+            else 
+                return true;
+        }
     }
 }
