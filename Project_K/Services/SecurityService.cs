@@ -20,7 +20,7 @@ namespace Project_K.Services
             using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password)))
             {
                 argon2.Salt = Encoding.UTF8.GetBytes(salt);
-                argon2.DegreeOfParallelism = 8; 
+                argon2.DegreeOfParallelism = 16; 
 
                 //(i KB)
                 argon2.MemorySize = memorySize;
