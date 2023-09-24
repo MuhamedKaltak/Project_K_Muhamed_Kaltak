@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Project_K.Model;
 using Project_K.Services;
+using Project_K.Utilities;
 using Project_K.View;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Project_K.ViewModel
         async Task Login()
         {
 
-            if (IsBusy)
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username,password}))
                 return;
 
             try
