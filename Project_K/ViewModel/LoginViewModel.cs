@@ -34,6 +34,12 @@ namespace Project_K.ViewModel
             await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
         }
 
+        [RelayCommand]
+        async Task NavigateToRecoverUsernamePageAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(RecoverUsernamePage)}");
+        }
+
 
         [RelayCommand]
         async Task Login()
@@ -77,10 +83,6 @@ namespace Project_K.ViewModel
             {
                 IsBusy = false;
             }
-
-            
-
         }
-
     }
 }

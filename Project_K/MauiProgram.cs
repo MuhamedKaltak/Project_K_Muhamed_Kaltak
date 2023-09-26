@@ -25,17 +25,20 @@ namespace Project_K
 		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddTransient<LoginService>();
             builder.Services.AddTransient<RegisterService>();
             builder.Services.AddTransient<SecurityService>();
-            builder.Services.AddTransient<LoginService>();
+            builder.Services.AddTransient<EmailService>();
 
             builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
 
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<RecoveryViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<RecoverUsernamePage>();
 
             return builder.Build();
         }

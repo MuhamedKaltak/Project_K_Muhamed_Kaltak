@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Project_K.View.RecoverUsernamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:RecoveryViewModel">
+
+    <ScrollView>
+        <Grid RowDefinitions="*,Auto">
+
+            <Label
+                Margin="0,60,0,0"
+                FontSize="30"
+                HorizontalOptions="Center"
+                Text="Username Recovery"
+                VerticalOptions="StartAndExpand" />
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter your email"
+                            Style="{StaticResource Entry_General}"
+                            Text="{Binding email}" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+
+
+
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                Grid.Row="1"
+                Margin="0,20,0,20"
+                Style="{StaticResource RegisterHorizontalStack}"
+                VerticalOptions="End">
+
+                <Button
+                    Command="{Binding NavigateToLoginPageCommand}"
+                    Style="{StaticResource Button_General}"
+                    Text="Cancel" />
+                <Button
+                    Margin="20,0,0,0"
+                    Command="{Binding RecoverUsernameCommand}"
+                    Style="{StaticResource Button_General}"
+                    Text="Recover Username" />
+
+            </HorizontalStackLayout>
+
+            <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -20,11 +20,24 @@ namespace Project_K.Services
 
         public async Task<bool> EmailAlreadyInUse(string email)
         {
-            var emailInUse = await DatabaseManager.CheckExistingUser(email);
+            var emailInUse = await DatabaseManager.CheckExistingUserByEmail(email);
 
             if (emailInUse)
             {
                 await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
+                return true;
+            }
+
+            return false;
+        }
+        
+        public async Task<bool> UsernameAlreadyInUse(string username)
+        {
+            var usernameInUse = await DatabaseManager.CheckExistingUsername(username);
+
+            if (usernameInUse)
+            {
+                await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
                 return true;
             }
 
@@ -71,7 +84,6 @@ namespace Project_K.Services
                 return password.Equals(confirmPassword);
             });
         }
-
 
     }
 }

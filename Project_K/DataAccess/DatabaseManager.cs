@@ -1,4 +1,5 @@
-﻿using Project_K.Model;
+﻿using Microsoft.Maui.ApplicationModel.Communication;
+using Project_K.Model;
 using Project_K.Utilities;
 using SQLite;
 using System;
@@ -32,6 +33,9 @@ namespace Project_K.DataAccess
 
         }
 
+
+
+
         public static async Task<User> GetUserByUsername(string username)
         {
             await Init();
@@ -39,7 +43,17 @@ namespace Project_K.DataAccess
             return await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
         }
 
-        public static async Task<bool> CheckExistingUser(string email)
+        public static async Task<User> GetUserByEmail(string email)
+        {
+            await Init();
+
+            return await Database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+
+
+
+        public static async Task<bool> CheckExistingUserByEmail(string email)
         {
             await Init();
 
@@ -48,6 +62,18 @@ namespace Project_K.DataAccess
             if (user == null)
                 return false;
             else 
+                return true;
+        }
+
+        public static async Task<bool> CheckExistingUsername(string username)
+        {
+            await Init();
+
+            var user = await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+
+            if (user == null)
+                return false;
+            else
                 return true;
         }
     }

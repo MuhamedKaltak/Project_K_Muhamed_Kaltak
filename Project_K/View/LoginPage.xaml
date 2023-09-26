@@ -48,7 +48,12 @@
                 <Label
                     Margin="70,0,0,0"
                     Style="{StaticResource Label_Link}"
-                    Text="Forgot Username?" />
+                    Text="Forgot Username?">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToRecoverUsernamePageCommand}" />
+                    </Label.GestureRecognizers>
+
+                </Label>
             </HorizontalStackLayout>
 
             <Button

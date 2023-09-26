@@ -65,7 +65,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username,password,name,lastName,email}) || !await registerService.ArePasswordsMatching(password,confirmPassword) || !await registerService.IsEmailInValidFormat(email) || await registerService.EmailAlreadyInUse(email))
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username,password,name,lastName,email}) || !await registerService.ArePasswordsMatching(password,confirmPassword) || !await registerService.IsEmailInValidFormat(email) || await registerService.EmailAlreadyInUse(email) || await registerService.UsernameAlreadyInUse(username))
                 return;
 
             try

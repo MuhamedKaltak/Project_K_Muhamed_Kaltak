@@ -9,6 +9,7 @@ namespace Project_K
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(RecoverUsernamePage),typeof(RecoverUsernamePage));
         }
     }
 }
