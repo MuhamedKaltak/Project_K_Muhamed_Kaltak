@@ -1,5 +1,4 @@
 ﻿using Microsoft.Maui.ApplicationModel.Communication;
-using Project_K.DataAccess;
 using Project_K.Model;
 using Project_K.Utilities;
 using System;
@@ -12,39 +11,7 @@ using System.Threading.Tasks;
 namespace Project_K.Services
 {
     public class RegisterService
-    {
-        public async Task RegisterUserToDatabase(User user)
-        {
-            await DatabaseManager.AddUser(user);
-        }
-
-        public async Task<bool> EmailAlreadyInUse(string email)
-        {
-            var emailInUse = await DatabaseManager.CheckExistingUserByEmail(email);
-
-            if (emailInUse)
-            {
-                await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
-                return true;
-            }
-
-            return false;
-        }
-        
-        public async Task<bool> UsernameAlreadyInUse(string username)
-        {
-            var usernameInUse = await DatabaseManager.CheckExistingUsername(username);
-
-            if (usernameInUse)
-            {
-                await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
-                return true;
-            }
-
-            return false;
-        }
-
-
+    {   
         public async Task<bool> IsEmailInValidFormat(string email)
         {
             var validEmail = await CheckEmailFormat(email);

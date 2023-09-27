@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Project_K.Utilities;
-using Project_K.DataAccess;
 using Project_K.Model;
 
 namespace Project_K.Services
@@ -42,11 +41,6 @@ namespace Project_K.Services
                 await UINotification.DisplayAlertMessage("ERROR", $"Could not send email, exception : {ex.Message}", "OK");
             }
         }
-
-
-        public async Task<User> GetUserIfEmailExist(string recipientEmail)
-        {
-           return await DatabaseManager.GetUserByEmail(recipientEmail);
-        }
+     
     }
 }

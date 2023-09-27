@@ -6,7 +6,7 @@
     xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
     xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
     Title="{Binding Title}"
-    x:DataType="viewmodel:RecoveryViewModel">
+    x:DataType="viewmodel:RecoverUsernameViewModel">
 
     <ScrollView>
         <Grid RowDefinitions="*,Auto">

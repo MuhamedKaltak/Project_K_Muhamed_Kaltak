@@ -10,15 +10,17 @@ using System.Threading.Tasks;
 
 namespace Project_K.ViewModel
 {
-    public partial class RecoveryViewModel : BaseViewModel
+    public partial class RecoverUsernameViewModel : BaseViewModel
     {
+        DatabaseUserService databaseUserService;
         EmailService emailService;
 
         public string email {  get; set; }
 
-        public RecoveryViewModel(EmailService emailService)
+        public RecoverUsernameViewModel(DatabaseUserService databaseUserService,EmailService emailService)
         {
             Title = "Username Recovery";
+            this.databaseUserService = databaseUserService;
             this.emailService = emailService;
         }
 
@@ -34,7 +36,7 @@ namespace Project_K.ViewModel
             if (IsBusy)
                 return;
 
-            User user = await emailService.GetUserIfEmailExist(email);
+            User user = await databaseUserService.GetUserByEmail(email);
 
             if (user == null)
             {
@@ -48,7 +50,7 @@ namespace Project_K.ViewModel
 
                 await emailService.SendEmail(user.Email,"Recovery of your username",$"Your username in Project_K is: {user.Username}");
 
-                await UINotification.DisplayAlertMessage("Email Sent", $"Email has beem sent to {user.Email} ", "OK");
+                await UINotification.DisplayAlertMessage("Email Sent", $"Email has been sent to {user.Email} ", "OK");
                 await NavigateToLoginPage();
             }
             catch (Exception ex)

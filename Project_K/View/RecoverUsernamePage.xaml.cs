@@ -4,7 +4,7 @@ namespace Project_K.View;
 
 public partial class RecoverUsernamePage : ContentPage
 {
-	public RecoverUsernamePage(RecoveryViewModel recoveryViewModel)
+	public RecoverUsernamePage(RecoverUsernameViewModel recoveryViewModel)
 	{
 		InitializeComponent();
 

@@ -14,16 +14,15 @@ namespace Project_K.ViewModel
 {
     public partial class LoginViewModel : BaseViewModel
     {
-
-        LoginService loginService;
+        DatabaseUserService databaseUserService;
         SecurityService securityService;
 
         public string username {  get; set; }
         public string password { get; set; }
 
-        public LoginViewModel(LoginService loginService,SecurityService securityService)
+        public LoginViewModel(DatabaseUserService databaseUserService,SecurityService securityService)
         {
-            this.loginService = loginService;
+            this.databaseUserService = databaseUserService;
             this.securityService = securityService;
         }
 
@@ -52,7 +51,7 @@ namespace Project_K.ViewModel
             {
                 IsBusy = true;
 
-                var user = await loginService.GetUserByUsername(username);
+                var user = await databaseUserService.GetUserByUsername(username);
 
                 if (user == null)
                 {

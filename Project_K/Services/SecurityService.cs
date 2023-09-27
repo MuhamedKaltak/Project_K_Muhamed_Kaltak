@@ -42,6 +42,25 @@ namespace Project_K.Services
                 return Convert.ToBase64String(saltBytes);
             }
         }
+
+        public string GenerateVerificationCode()
+        {
+            Byte[] bytes;
+            String bytesBase64Url; //Detta är Base64Url-Encoded och inte Base64-encoded, vilket innebär att det är säkert att använda i en url, se bara till att konvertera det till Base64 först när man decodar det.
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+
+                bytes = new Byte[12]; //En multipel av 3 ex(3,6,12..) används för att undvika outputs med trailing padding.
+                rng.GetBytes(bytes);
+
+
+                //Konverterar det först till Base64 och därefter till Base64Url string.
+                bytesBase64Url = Convert.ToBase64String(bytes).Replace('+', '-').Replace('/', '_');
+            }
+
+            return bytesBase64Url;
+        }
+
         public async Task<bool> VerifyPassword(User user, string password)
         {
             string hashedPassword = await HashPassword(password, user.Salt);

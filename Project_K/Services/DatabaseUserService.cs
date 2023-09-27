@@ -1,21 +1,19 @@
-﻿using Microsoft.Maui.ApplicationModel.Communication;
+﻿using Project_K.Utilities;
 using Project_K.Model;
-using Project_K.Utilities;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_K.DataAccess
+namespace Project_K.Services
 {
-    public static class DatabaseManager
+    public class DatabaseUserService
     {
-        static SQLiteAsyncConnection Database;
+        SQLiteAsyncConnection Database;
 
-        static async Task Init()
+        async Task Init()
         {
             if (Database is not null)
                 return;
@@ -25,7 +23,7 @@ namespace Project_K.DataAccess
             await Database.CreateTableAsync<User>();
         }
 
-        public static async Task AddUser(User user)
+        public async Task AddUser(User user)
         {
             await Init();
 
@@ -36,14 +34,14 @@ namespace Project_K.DataAccess
 
 
 
-        public static async Task<User> GetUserByUsername(string username)
+        public async Task<User> GetUserByUsername(string username)
         {
             await Init();
 
             return await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
         }
 
-        public static async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByEmail(string email)
         {
             await Init();
 
@@ -53,7 +51,7 @@ namespace Project_K.DataAccess
 
 
 
-        public static async Task<bool> CheckExistingUserByEmail(string email)
+        public async Task<bool> CheckExistingUserByEmail(string email)
         {
             await Init();
 
@@ -61,11 +59,11 @@ namespace Project_K.DataAccess
 
             if (user == null)
                 return false;
-            else 
+            else
                 return true;
         }
 
-        public static async Task<bool> CheckExistingUsername(string username)
+        public async Task<bool> CheckExistingUserByUsername(string username)
         {
             await Init();
 
@@ -78,3 +76,4 @@ namespace Project_K.DataAccess
         }
     }
 }
+

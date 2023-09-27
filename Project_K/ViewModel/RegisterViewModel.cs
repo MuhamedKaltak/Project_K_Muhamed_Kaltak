@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Project_K.DataAccess;
 using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
@@ -16,6 +15,7 @@ namespace Project_K.ViewModel
 {
     public partial class RegisterViewModel : BaseViewModel
     {
+        DatabaseUserService databaseUserService;
         RegisterService registerService;
         SecurityService securityService;
 
@@ -35,8 +35,10 @@ namespace Project_K.ViewModel
         public string email { get; set; }
 
 
-        public RegisterViewModel(RegisterService registerService,SecurityService security ,IMediaPicker mediaPicker)
+        public RegisterViewModel(DatabaseUserService databaseUserService,RegisterService registerService,SecurityService security ,IMediaPicker mediaPicker)
         {
+            Title = "Register a new account";
+            this.databaseUserService = databaseUserService;
             this.registerService = registerService;
             this.securityService = security;
             this.mediaPicker = mediaPicker;
@@ -65,8 +67,19 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username,password,name,lastName,email}) || !await registerService.ArePasswordsMatching(password,confirmPassword) || !await registerService.IsEmailInValidFormat(email) || await registerService.EmailAlreadyInUse(email) || await registerService.UsernameAlreadyInUse(username))
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword) || !await registerService.IsEmailInValidFormat(email))
                 return;
+
+            if(await databaseUserService.CheckExistingUserByEmail(email))
+            {
+                await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
+                return;
+            }
+            else if (await databaseUserService.CheckExistingUserByUsername(username))
+            {
+                await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
+                return;
+            }
 
             try
             {
@@ -85,7 +98,7 @@ namespace Project_K.ViewModel
                     Salt = salt
                 };
 
-                await registerService.RegisterUserToDatabase(user);
+                await databaseUserService.AddUser(user);
 
                 await NavigateToLoginPageAsync();
 
