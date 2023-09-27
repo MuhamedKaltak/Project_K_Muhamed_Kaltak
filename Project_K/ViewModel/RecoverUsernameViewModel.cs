@@ -33,7 +33,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         public async Task RecoverUsername()
         {
-            if (IsBusy)
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { email }))
                 return;
 
             User user = await databaseUserService.GetUserByEmail(email);

@@ -28,18 +28,24 @@ namespace Project_K
             builder.Services.AddTransient<RegisterService>();
             builder.Services.AddTransient<SecurityService>();
             builder.Services.AddTransient<EmailService>();
+
             builder.Services.AddSingleton<DatabaseUserService>();
+
 
             builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
 
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<RecoverUsernameViewModel>();
-            builder.Services.AddTransient<RecoverPasswordViewModel>();
+            builder.Services.AddTransient<ResetPasswordViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<RecoverUsernamePage>();
+            builder.Services.AddTransient<ResetPasswordEmailPage>();
+            builder.Services.AddTransient<ResetPasswordTokenPage>();
+            builder.Services.AddTransient<ResetPasswordPage>();
+
 
             return builder.Build();
         }

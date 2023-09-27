@@ -39,6 +39,12 @@ namespace Project_K.ViewModel
             await Shell.Current.GoToAsync($"{nameof(RecoverUsernamePage)}");
         }
 
+        [RelayCommand]
+        async Task NavigateToResetPasswordEmailPageAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ResetPasswordEmailPage)}");
+        }
+
 
         [RelayCommand]
         async Task Login()

@@ -86,7 +86,7 @@ namespace Project_K.ViewModel
                 IsBusy = true;
 
                 var salt = await securityService.GenerateRandomSalt(16);
-                var hashedPassword = await securityService.HashPassword(password,salt);
+                var hashedPassword = await securityService.Hash(password,salt);
 
                 User user = new User
                 {

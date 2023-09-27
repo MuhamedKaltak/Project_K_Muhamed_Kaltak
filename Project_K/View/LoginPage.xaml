@@ -31,6 +31,7 @@
 
             <Frame Margin="0,10,0,0" Style="{StaticResource Frame_General}">
                 <Entry
+                    IsPassword="True"
                     Placeholder="Password"
                     Style="{StaticResource Entry_General}"
                     Text="{Binding password}" />
@@ -41,7 +42,7 @@
 
                     <!--  Placeholder.  TODO: Sätt in nya pages gällande hantering av att åretställa lösenord/användarnamn. Går möjligen att återanvända från Bank_Muhamed_Kaltak projektet  -->
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateToRegisterPageCommand}" />
+                        <TapGestureRecognizer Command="{Binding NavigateToResetPasswordEmailPageCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 

@@ -12,12 +12,12 @@ namespace Project_K.Services
 {
     public class SecurityService
     {
-        public async Task<string> HashPassword(string password,string salt)
+        public async Task<string> Hash(string value,string salt)
         {
             int memorySize = 65536; 
             int iterations = 4; 
 
-            using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password)))
+            using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(value)))
             {
                 argon2.Salt = Encoding.UTF8.GetBytes(salt);
                 argon2.DegreeOfParallelism = 16; 
@@ -43,18 +43,16 @@ namespace Project_K.Services
             }
         }
 
-        public string GenerateVerificationCode()
+        public async Task<string> GenerateToken(User user)
         {
-            Byte[] bytes;
-            String bytesBase64Url; //Detta är Base64Url-Encoded och inte Base64-encoded, vilket innebär att det är säkert att använda i en url, se bara till att konvertera det till Base64 först när man decodar det.
+            byte[] bytes;
+            string bytesBase64Url;
+
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
+                bytes = new byte[12];
+                await Task.Run(() => rng.GetBytes(bytes)); // Use Task.Run to run the synchronous operation asynchronously.
 
-                bytes = new Byte[12]; //En multipel av 3 ex(3,6,12..) används för att undvika outputs med trailing padding.
-                rng.GetBytes(bytes);
-
-
-                //Konverterar det först till Base64 och därefter till Base64Url string.
                 bytesBase64Url = Convert.ToBase64String(bytes).Replace('+', '-').Replace('/', '_');
             }
 
@@ -63,9 +61,21 @@ namespace Project_K.Services
 
         public async Task<bool> VerifyPassword(User user, string password)
         {
-            string hashedPassword = await HashPassword(password, user.Salt);
+            string hashedPassword = await Hash(password, user.Salt);
 
             return hashedPassword == user.Password;
+        }
+
+        public async Task<bool> VerifyToken(User user, string enteredToken)
+        {
+            TimeSpan timeSpan = DateTime.Now - user.PasswordResetDate;
+
+            if (user.PasswordResetToken == await Hash(enteredToken, user.Salt) && timeSpan.Minutes <= 5)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

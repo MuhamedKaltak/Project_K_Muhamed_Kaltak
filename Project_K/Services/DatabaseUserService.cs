@@ -49,6 +49,13 @@ namespace Project_K.Services
         }
 
 
+        public async Task UpdateUser(User user)
+        {
+            await Init();
+
+            await Database.UpdateAsync(user);
+
+        }
 
 
         public async Task<bool> CheckExistingUserByEmail(string email)
