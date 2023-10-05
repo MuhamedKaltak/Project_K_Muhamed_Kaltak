@@ -27,11 +27,9 @@
 
                 <Image
                     Margin="0,60,0,0"
-                    Aspect="AspectFill"
+                    Aspect="AspectFit"
                     HeightRequest="200"
-                    HorizontalOptions="CenterAndExpand"
                     Source="{Binding ImageToShowSource}"
-                    VerticalOptions="CenterAndExpand"
                     WidthRequest="200" />
 
                 <Frame Margin="0,40,0,0" Style="{StaticResource Frame_General}">

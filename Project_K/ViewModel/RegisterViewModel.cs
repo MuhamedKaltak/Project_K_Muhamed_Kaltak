@@ -62,6 +62,8 @@ namespace Project_K.ViewModel
 
             profilePicture = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databasen framöver
 
+            profilePicture = ImageTool.CompressAndResizeImage(profilePicture, 400, 400, 80);
+
             ImageToShowSource = ImageSource.FromStream(() => new MemoryStream(profilePicture));
         }
 
@@ -88,8 +90,6 @@ namespace Project_K.ViewModel
 
                 var salt = await securityService.GenerateRandomSalt(16);
                 var hashedPassword = await securityService.Hash(password,salt);
-
-                profilePicture = ImageTool.CompressAndResizeImage(profilePicture, 200, 200, 80);
 
                 User user = new User
                 {
