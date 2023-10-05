@@ -19,6 +19,7 @@ namespace Project_K.Model
         public string Salt { get; set; }
         public string PasswordResetToken { get; set; }
         public DateTime PasswordResetDate { get; set; }
+        public byte[] ProfilePicture { get; set; }
 
 
     }

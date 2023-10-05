@@ -33,6 +33,7 @@ namespace Project_K.ViewModel
         public string name { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
+        private byte[] profilePicture { get; set; }
 
 
         public RegisterViewModel(DatabaseUserService databaseUserService,RegisterService registerService,SecurityService security ,IMediaPicker mediaPicker)
@@ -59,9 +60,9 @@ namespace Project_K.ViewModel
 
             if (file == null) return;
 
-            var byteArray = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databasen framöver
+            profilePicture = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databasen framöver
 
-            ImageToShowSource = ImageSource.FromStream(() => new MemoryStream(byteArray));
+            ImageToShowSource = ImageSource.FromStream(() => new MemoryStream(profilePicture));
         }
 
         [RelayCommand]
@@ -88,6 +89,8 @@ namespace Project_K.ViewModel
                 var salt = await securityService.GenerateRandomSalt(16);
                 var hashedPassword = await securityService.Hash(password,salt);
 
+                profilePicture = ImageTool.CompressAndResizeImage(profilePicture, 200, 200, 80);
+
                 User user = new User
                 {
                     Username = username,
@@ -95,7 +98,8 @@ namespace Project_K.ViewModel
                     Name = name,
                     LastName = lastName,
                     Email = email,
-                    Salt = salt
+                    Salt = salt,
+                    ProfilePicture = profilePicture
                 };
 
                 await databaseUserService.AddUser(user);
