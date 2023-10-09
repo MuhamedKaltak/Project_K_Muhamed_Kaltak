@@ -69,7 +69,8 @@ namespace Project_K.ViewModel
 
                 if (passwordCorrect)
                 {
-                    await Shell.Current.DisplayAlert("LOGGA IN", "LOGGA IN", "OK");
+                    //await Shell.Current.DisplayAlert("LOGGA IN", "LOGGA IN", "OK");
+                    await Shell.Current.GoToAsync("//Home");
                 }
                 else
                 {
