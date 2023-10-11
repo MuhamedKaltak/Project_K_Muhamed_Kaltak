@@ -9,10 +9,10 @@ namespace Project_K.Utilities
 {
     public static class ImageTool
     {
-        public static byte[] CompressAndResizeImage(byte[] imageData, int targetWidth, int targetHeight, int quality)
+        public static byte[] CompressAndResizeImage(string filepath, int targetWidth, int targetHeight, int quality)
         {
-            using (var stream = new SKMemoryStream(imageData))
-            using (var original = SKBitmap.Decode(stream))
+            using(var imageroot = SKImage.FromEncodedData(filepath))
+            using (var original = SKBitmap.FromImage(imageroot))
             {
                 int newWidth, newHeight;
                 CalculateTargetDimensions(original.Width, original.Height, targetWidth, targetHeight, out newWidth, out newHeight);
@@ -25,6 +25,8 @@ namespace Project_K.Utilities
                 }
             }
         }
+
+
 
         private static void CalculateTargetDimensions(int originalWidth, int originalHeight, int targetWidth, int targetHeight, out int newWidth, out int newHeight)
         {

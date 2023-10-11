@@ -4,6 +4,7 @@ using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
 using Project_K.View;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,9 +61,7 @@ namespace Project_K.ViewModel
 
             if (file == null) return;
 
-            profilePicture = File.ReadAllBytes(file.FullPath); //Detta ska sparas till databasen framöver
-
-            profilePicture = ImageTool.CompressAndResizeImage(profilePicture, 400, 400, 80);
+            profilePicture = ImageTool.CompressAndResizeImage(file.FullPath, 200, 200, 80);
 
             ImageToShowSource = ImageSource.FromStream(() => new MemoryStream(profilePicture));
         }

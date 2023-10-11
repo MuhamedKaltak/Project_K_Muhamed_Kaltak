@@ -20,6 +20,8 @@ namespace Project_K.ViewModel
         public string username {  get; set; }
         public string password { get; set; }
 
+        private const string ADMIN_USERNAME_PASSWORD = "admin";
+
         public LoginViewModel(DatabaseUserService databaseUserService,SecurityService securityService)
         {
             this.databaseUserService = databaseUserService;
@@ -65,9 +67,13 @@ namespace Project_K.ViewModel
                     return;
                 }
 
-                bool passwordCorrect = await securityService.VerifyPassword(user, password);
+                if (username == ADMIN_USERNAME_PASSWORD && password == ADMIN_USERNAME_PASSWORD) //Primarly used to avoid slow emulator hashing speed
+                {
+                    await Shell.Current.GoToAsync("//Home");
+                    return;
+                }
 
-                if (passwordCorrect)
+                if (await securityService.VerifyPassword(user, password))
                 {
                     //await Shell.Current.DisplayAlert("LOGGA IN", "LOGGA IN", "OK");
                     await Shell.Current.GoToAsync("//Home");
