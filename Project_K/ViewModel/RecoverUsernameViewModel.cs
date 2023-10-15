@@ -25,12 +25,6 @@ namespace Project_K.ViewModel
         }
 
         [RelayCommand]
-        public async Task NavigateToLoginPage()
-        {
-            await Shell.Current.GoToAsync("..");
-        }
-
-        [RelayCommand]
         public async Task RecoverUsername()
         {
             if (IsBusy || !await UINotification.CheckValidField(new List<string> { email }))
@@ -51,7 +45,7 @@ namespace Project_K.ViewModel
                 await emailService.SendEmail(user.Email,"Recovery of your username",$"Your username in Project_K is: {user.Username}");
 
                 await UINotification.DisplayAlertMessage("Email Sent", $"Email has been sent to {user.Email} ", "OK");
-                await NavigateToLoginPage();
+                await NavigateBackToPreviousPage();
             }
             catch (Exception ex)
             {

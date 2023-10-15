@@ -136,7 +136,7 @@
                     Style="{StaticResource RegisterHorizontalStack}">
 
                     <Button
-                        Command="{Binding NavigateToLoginPageCommand}"
+                        Command="{Binding NavigateBackToPreviousPageCommand}"
                         Style="{StaticResource Button_General}"
                         Text="Cancel" />
                     <Button

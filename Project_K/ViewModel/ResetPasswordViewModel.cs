@@ -38,7 +38,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         public async Task NavigateToLoginPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
         [RelayCommand]

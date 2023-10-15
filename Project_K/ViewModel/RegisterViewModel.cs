@@ -47,13 +47,6 @@ namespace Project_K.ViewModel
             imageToShowSource = "user.png";
         }
 
-
-        [RelayCommand]
-        async Task NavigateToLoginPageAsync()
-        {
-            await Shell.Current.GoToAsync("..",true);
-        }
-
         [RelayCommand]
         async Task PickProfilePicture()
         {
@@ -103,7 +96,7 @@ namespace Project_K.ViewModel
 
                 await databaseUserService.AddUser(user);
 
-                await NavigateToLoginPageAsync();
+                await NavigateBackToPreviousPage();
 
             }
             catch (Exception ex)
