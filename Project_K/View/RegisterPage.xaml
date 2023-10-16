@@ -25,20 +25,26 @@
                     HorizontalOptions="Center"
                     Text="Register a new account" />
 
-                <Image
-                    Margin="0,60,0,0"
-                    Aspect="AspectFit"
-                    HeightRequest="200"
-                    Source="{Binding ImageToShowSource}"
-                    WidthRequest="200" />
+                <Border Margin="0,60,0,0" Style="{StaticResource Border_ProfileImage}">
+
+
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="200"
+                        Source="{Binding ImageToShowSource}"
+                        WidthRequest="200" />
+
+                </Border>
+
+
 
                 <Frame Margin="0,40,0,0" Style="{StaticResource Frame_General}">
 
                     <Button
-                        BackgroundColor="Black"
                         Command="{Binding PickProfilePictureCommand}"
-                        IsEnabled="{Binding IsNotBusy}"
-                        Text="Select a profile picture for your account" />
+                        Style="{StaticResource Button_General}"
+                        Text="Select a profile picture for your account"
+                        WidthRequest="300" />
                 </Frame>
 
                 <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">

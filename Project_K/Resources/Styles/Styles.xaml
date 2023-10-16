@@ -23,9 +23,8 @@
 
     <Style x:Key="Button_General" TargetType="Button">
         <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
-        <Setter Property="Background" Value="{StaticResource Yellow100Accent}" />
+        <Setter Property="Background" Value="{StaticResource Black}" />
         <Setter Property="Text" Value="PLACEHOLDER" />
-        <Setter Property="TextColor" Value="{StaticResource Black}" />
         <Setter Property="WidthRequest" Value="160" />
     </Style>
 
@@ -50,6 +49,13 @@
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
+
+    <Style x:Key="Border_ProfileImage" TargetType="Border">
+        <Setter Property="HeightRequest" Value="200" />
+        <Setter Property="WidthRequest" Value="200" />
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 100" />
+    </Style>
 
     <Style x:Key="Frame_General" TargetType="Frame">
         <Setter Property="Padding" Value="10,0,10,0" />
