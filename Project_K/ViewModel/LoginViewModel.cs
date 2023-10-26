@@ -16,16 +16,18 @@ namespace Project_K.ViewModel
     {
         DatabaseUserService databaseUserService;
         SecurityService securityService;
+        UserService userService;
 
         public string username {  get; set; }
         public string password { get; set; }
 
         private const string ADMIN_USERNAME_PASSWORD = "admin";
 
-        public LoginViewModel(DatabaseUserService databaseUserService,SecurityService securityService)
+        public LoginViewModel(DatabaseUserService databaseUserService,SecurityService securityService,UserService userService)
         {
             this.databaseUserService = databaseUserService;
             this.securityService = securityService;
+            this.userService = userService;
         }
 
 
@@ -76,6 +78,7 @@ namespace Project_K.ViewModel
                 if (await securityService.VerifyPassword(user, password))
                 {
                     //await Shell.Current.DisplayAlert("LOGGA IN", "LOGGA IN", "OK");
+                    userService.user = user;
                     await Shell.Current.GoToAsync("//Home");
                 }
                 else

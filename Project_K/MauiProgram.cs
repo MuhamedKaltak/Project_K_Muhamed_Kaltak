@@ -30,6 +30,7 @@ namespace Project_K
             builder.Services.AddTransient<EmailService>();
 
             builder.Services.AddSingleton<DatabaseUserService>();
+            builder.Services.AddSingleton<UserService>();
 
 
             builder.Services.AddSingleton<IMediaPicker>(MediaPicker.Default);
@@ -39,12 +40,16 @@ namespace Project_K
             builder.Services.AddTransient<RecoverUsernameViewModel>();
             builder.Services.AddTransient<ResetPasswordViewModel>();
 
+            builder.Services.AddSingleton<UserProfileViewModel>(); 
+
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<RecoverUsernamePage>();
             builder.Services.AddTransient<ResetPasswordEmailPage>();
             builder.Services.AddTransient<ResetPasswordTokenPage>();
             builder.Services.AddTransient<ResetPasswordPage>();
+
+            builder.Services.AddSingleton<UserProfilePage>();
 
 
             return builder.Build();

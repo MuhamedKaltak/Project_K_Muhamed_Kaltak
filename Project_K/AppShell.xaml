@@ -19,7 +19,7 @@
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="FAS"
-                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
+                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"
                     Color="{AppThemeBinding Dark=White,
                                             Light={StaticResource SystemGray5Dark}}" />
             </Tab.Icon>
@@ -30,11 +30,11 @@
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="FAS"
-                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.Heart}"
+                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
                     Color="{AppThemeBinding Dark=White,
                                             Light={StaticResource SystemGray5Dark}}" />
             </Tab.Icon>
-            <ShellContent Title="Login" ContentTemplate="{DataTemplate views:RegisterPage}" />
+            <ShellContent Title="Login" ContentTemplate="{DataTemplate views:UserProfilePage}" />
         </Tab>
     </TabBar>
 

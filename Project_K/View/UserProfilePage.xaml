@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Project_K.View.UserProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    Title="UserProfilePage"
+    x:DataType="viewmodel:UserProfileViewModel">
+    <ScrollView>
+        <Grid RowDefinitions="*,Auto">
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                HorizontalOptions="Center">
+                <Label
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    Text="User Profile" />
+
+                <Border Margin="0,60,0,0" Style="{StaticResource Border_ProfileImage}">
+
+
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="200"
+                        Source="{Binding ProfileImage}"
+                        WidthRequest="200" />
+
+                </Border>
+
+
+
+                <Frame Margin="0,40,0,0" Style="{StaticResource Frame_General}">
+
+                    <Button
+                        Command="{Binding ChangeProfilePictureCommand}"
+                        Style="{StaticResource Button_General}"
+                        Text="Change Profile Picture"
+                        WidthRequest="300" />
+                </Frame>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.User}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            IsReadOnly="True"
+                            Style="{StaticResource Entry_General}"
+                            Text="{Binding User.Username}" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter your name"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter your last name"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Margin="0,40,0,40" Style="{StaticResource RegisterHorizontalStack}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter your email adress"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+            </VerticalStackLayout>
+
+            <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
