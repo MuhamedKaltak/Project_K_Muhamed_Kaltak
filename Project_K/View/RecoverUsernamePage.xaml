@@ -25,7 +25,7 @@
                 VerticalOptions="Center">
 
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
 
@@ -48,7 +48,7 @@
             <HorizontalStackLayout
                 Grid.Row="1"
                 Margin="0,20,0,20"
-                Style="{StaticResource RegisterHorizontalStack}"
+                Style="{StaticResource RegisterHorizontalStackLayout}"
                 VerticalOptions="End">
 
                 <Button

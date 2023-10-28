@@ -41,7 +41,7 @@
                         WidthRequest="300" />
                 </Frame>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource UserProfileHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.User}" />
 
@@ -53,9 +53,23 @@
                             Style="{StaticResource Entry_General}"
                             Text="{Binding User.Username}" />
                     </Frame>
+
+                    <Grid>
+                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label
+                            Grid.Column="1"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Accept_FAS}" />
+                        <Label
+                            Grid.Column="2"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Cancel_FAS}" />
+                    </Grid>
+
+
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource UserProfileHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
@@ -67,9 +81,22 @@
                             Style="{StaticResource Entry_General}"
                             Text="" />
                     </Frame>
+
+                    <Grid>
+                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label
+                            Grid.Column="1"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Accept_FAS}" />
+                        <Label
+                            Grid.Column="2"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Cancel_FAS}" />
+                    </Grid>
+
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource UserProfileHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
@@ -81,9 +108,22 @@
                             Style="{StaticResource Entry_General}"
                             Text="" />
                     </Frame>
+
+                    <Grid>
+                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label
+                            Grid.Column="1"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Accept_FAS}" />
+                        <Label
+                            Grid.Column="2"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Cancel_FAS}" />
+                    </Grid>
+
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="0,40,0,40" Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Margin="15,40,0,40" Style="{StaticResource UserProfileHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
 
@@ -95,6 +135,19 @@
                             Style="{StaticResource Entry_General}"
                             Text="" />
                     </Frame>
+
+                    <Grid>
+                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label
+                            Grid.Column="1"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Accept_FAS}" />
+                        <Label
+                            Grid.Column="2"
+                            IsVisible="True"
+                            Style="{StaticResource Label_Cancel_FAS}" />
+                    </Grid>
+
                 </HorizontalStackLayout>
 
 

@@ -47,7 +47,7 @@
                         WidthRequest="300" />
                 </Frame>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.User}" />
 
@@ -61,7 +61,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
 
@@ -76,7 +76,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
 
@@ -91,7 +91,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
@@ -105,7 +105,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.IdCard}" />
 
@@ -119,7 +119,7 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}">
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Envelope}" />
 
@@ -133,13 +133,13 @@
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStack}" />
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}" />
 
 
                 <HorizontalStackLayout
                     Grid.Row="1"
                     Margin="0,0,0,20"
-                    Style="{StaticResource RegisterHorizontalStack}">
+                    Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Button
                         Command="{Binding NavigateBackToPreviousPageCommand}"

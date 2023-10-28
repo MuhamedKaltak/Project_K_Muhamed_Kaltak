@@ -3,6 +3,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
     xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
     x:DataType="viewmodel:BaseViewModel">
 
@@ -29,8 +30,13 @@
     </Style>
 
 
-    <Style x:Key="RegisterHorizontalStack" TargetType="HorizontalStackLayout">
+    <Style x:Key="RegisterHorizontalStackLayout" TargetType="HorizontalStackLayout">
         <Setter Property="Margin" Value="0,40,0,0" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="UserProfileHorizontalStackLayout" TargetType="HorizontalStackLayout">
+        <Setter Property="Margin" Value="15,40,0,0" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
@@ -44,6 +50,35 @@
     </Style>
 
     <Style x:Key="Label_FontAwesomeIcon_Solid" TargetType="Label">
+        <Setter Property="FontFamily" Value="FAS" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="Label_Edit_FAS" TargetType="Label">
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
+        <Setter Property="Text" Value="{x:Static fontAwesome:FontAwesomeIcons.Pencil}" />
+        <Setter Property="TextColor" Value="CadetBlue" />
+        <Setter Property="FontFamily" Value="FAS" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="Label_Accept_FAS" TargetType="Label">
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
+        <Setter Property="TranslationX" Value="40" />
+        <Setter Property="Text" Value="{x:Static fontAwesome:FontAwesomeIcons.Check}" />
+        <Setter Property="TextColor" Value="Green" />
+        <Setter Property="FontFamily" Value="FAS" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="Label_Cancel_FAS" TargetType="Label">
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
+        <Setter Property="TranslationX" Value="60" />
+        <Setter Property="Text" Value="{x:Static fontAwesome:FontAwesomeIcons.Xmark}" />
+        <Setter Property="TextColor" Value="Red" />
         <Setter Property="FontFamily" Value="FAS" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="VerticalOptions" Value="Center" />
