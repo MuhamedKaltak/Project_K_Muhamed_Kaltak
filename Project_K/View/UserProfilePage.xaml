@@ -49,23 +49,62 @@
 
 
                         <Entry
-                            IsReadOnly="True"
+                            IsReadOnly="{Binding EditingUsername}"
                             Style="{StaticResource Entry_General}"
                             Text="{Binding User.Username}" />
                     </Frame>
 
                     <Grid>
-                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label IsEnabled="{Binding EditingUsername}" Style="{StaticResource Label_Edit_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ModifyUsernameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="1"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Accept_FAS}" />
+                            IsVisible="{Binding EditUsername}"
+                            Style="{StaticResource Label_Accept_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ApplyModificationsToUsernameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="2"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Cancel_FAS}" />
+                            IsVisible="{Binding EditUsername}"
+                            Style="{StaticResource Label_Cancel_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelModificationsToUsernameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                     </Grid>
 
+
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Margin="15,40,0,0" Style="{StaticResource UserProfileHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Lock}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            IsPassword="True"
+                            IsReadOnly="True"
+                            Placeholder="Enter your email adress"
+                            Style="{StaticResource Entry_General}"
+                            Text="{Binding User.Password}" />
+                    </Frame>
+
+                    <Grid>
+                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                    </Grid>
 
                 </HorizontalStackLayout>
 
@@ -77,21 +116,40 @@
 
 
                         <Entry
+                            IsReadOnly="{Binding EditingName}"
                             Placeholder="Enter your name"
                             Style="{StaticResource Entry_General}"
-                            Text="" />
+                            Text="{Binding User.Name}" />
                     </Frame>
 
                     <Grid>
-                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label IsEnabled="{Binding EditingName}" Style="{StaticResource Label_Edit_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ModifyNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="1"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Accept_FAS}" />
+                            IsVisible="{Binding EditName}"
+                            Style="{StaticResource Label_Accept_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ApplyModificationsToNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="2"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Cancel_FAS}" />
+                            IsVisible="{Binding EditName}"
+                            Style="{StaticResource Label_Cancel_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelModificationsToNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                     </Grid>
 
                 </HorizontalStackLayout>
@@ -104,21 +162,40 @@
 
 
                         <Entry
+                            IsReadOnly="{Binding EditingLastName}"
                             Placeholder="Enter your last name"
                             Style="{StaticResource Entry_General}"
-                            Text="" />
+                            Text="{Binding User.LastName}" />
                     </Frame>
 
                     <Grid>
-                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label IsEnabled="{Binding EditingLastName}" Style="{StaticResource Label_Edit_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ModifyLastNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="1"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Accept_FAS}" />
+                            IsVisible="{Binding EditLastName}"
+                            Style="{StaticResource Label_Accept_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ApplyModificationsToLastNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                         <Label
                             Grid.Column="2"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Cancel_FAS}" />
+                            IsVisible="{Binding EditLastName}"
+                            Style="{StaticResource Label_Cancel_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelModificationsToLastNameCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                     </Grid>
 
                 </HorizontalStackLayout>
@@ -131,21 +208,14 @@
 
 
                         <Entry
+                            IsReadOnly="True"
                             Placeholder="Enter your email adress"
                             Style="{StaticResource Entry_General}"
-                            Text="" />
+                            Text="{Binding User.Email}" />
                     </Frame>
 
                     <Grid>
                         <Label Style="{StaticResource Label_Edit_FAS}" />
-                        <Label
-                            Grid.Column="1"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Accept_FAS}" />
-                        <Label
-                            Grid.Column="2"
-                            IsVisible="True"
-                            Style="{StaticResource Label_Cancel_FAS}" />
                     </Grid>
 
                 </HorizontalStackLayout>
