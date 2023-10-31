@@ -14,6 +14,12 @@ namespace Project_K
             Routing.RegisterRoute(nameof(ResetPasswordEmailPage),typeof(ResetPasswordEmailPage));
             Routing.RegisterRoute(nameof(ResetPasswordTokenPage),typeof(ResetPasswordTokenPage));
             Routing.RegisterRoute(nameof(ResetPasswordPage),typeof(ResetPasswordPage));
+            Routing.RegisterRoute(nameof(UserProfilePage),typeof(UserProfilePage));
+            Routing.RegisterRoute(nameof(ChangePasswordSecurityCheckPage),typeof(ChangePasswordSecurityCheckPage));
+            Routing.RegisterRoute(nameof(ChangePasswordPage),typeof(ChangePasswordPage));
+            Routing.RegisterRoute(nameof(ChangeEmailCurrentEmailTokenPage),typeof(ChangeEmailCurrentEmailTokenPage));
+            Routing.RegisterRoute(nameof(ChangeEmailNewEmailPage),typeof(ChangeEmailNewEmailPage));
+            Routing.RegisterRoute(nameof(ChangeEmailNewEmailTokenPage),typeof(ChangeEmailNewEmailTokenPage));
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Project_K.Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
-        public string PasswordResetToken { get; set; }
-        public DateTime PasswordResetDate { get; set; }
+        public string ResetToken { get; set; }
+        public DateTime ResetDate { get; set; }
         public byte[] ProfilePicture { get; set; }
 
 

@@ -80,10 +80,10 @@ namespace Project_K.ViewModel
                     return;
                 }
 
-                var token = await securityService.GenerateToken(User);
+                var token = await securityService.GenerateToken();
 
-                User.PasswordResetToken = await securityService.Hash(token,User.Salt);
-                User.PasswordResetDate = DateTime.Now;
+                User.ResetToken = await securityService.Hash(token,User.Salt);
+                User.ResetDate = DateTime.Now;
 
                 await databaseUserService.UpdateUser(User);
 
@@ -150,13 +150,17 @@ namespace Project_K.ViewModel
             {
                 IsBusy = true;
 
-                TimeSpan timeSpan = DateTime.Now - User.PasswordResetDate;
+                TimeSpan timeSpan = DateTime.Now - User.ResetDate;
 
                 if (timeSpan.Minutes <=5)
                 {
                     User.Password = await securityService.Hash(password, User.Salt);
+
+                    await databaseUserService.UpdateUser(User);
                     await UINotification.DisplayAlertMessage("Passwords have been changed", $"The password for your account has been successfully changed", "OK");
                     await NavigateToLoginPage();
+                    await emailService.SendEmail(User.Email, "Passwords have been changed", "The password associated with your account in Project_K has been changed, if this was not you contact support immediately.");
+
                 }
                 else
                 {

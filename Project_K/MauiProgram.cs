@@ -48,6 +48,11 @@ namespace Project_K
             builder.Services.AddTransient<ResetPasswordEmailPage>();
             builder.Services.AddTransient<ResetPasswordTokenPage>();
             builder.Services.AddTransient<ResetPasswordPage>();
+            builder.Services.AddTransient<ChangePasswordSecurityCheckPage>();
+            builder.Services.AddTransient<ChangePasswordPage>();
+            builder.Services.AddTransient<ChangeEmailCurrentEmailTokenPage>();
+            builder.Services.AddTransient<ChangeEmailNewEmailPage>();
+            builder.Services.AddTransient<ChangeEmailNewEmailTokenPage>();
 
             builder.Services.AddSingleton<UserProfilePage>();
 

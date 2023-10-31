@@ -1,14 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.ApplicationModel.Communication;
 using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
+using Project_K.View;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Project_K.ViewModel
@@ -17,6 +20,8 @@ namespace Project_K.ViewModel
     {
         DatabaseUserService databaseUserService;
         UserService userService;
+        SecurityService securityService;
+        EmailService emailService;
 
         IMediaPicker mediaPicker;
 
@@ -27,6 +32,12 @@ namespace Project_K.ViewModel
         User user;
 
         private User originalUserData;
+
+        public string enteredPassword {  get; set; }
+        public string newPassword {  get; set; }
+        public string confirmNewPassword {  get; set; }
+        public string enteredEmail { get; set; }
+        public string enteredToken { get; set; }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(EditingUsername))]
@@ -51,11 +62,14 @@ namespace Project_K.ViewModel
 
         private byte[] picture { get; set; }
 
-        public UserProfileViewModel(DatabaseUserService databaseUserService, UserService userService, IMediaPicker mediaPicker)
+        public UserProfileViewModel(DatabaseUserService databaseUserService, UserService userService, SecurityService securityService, EmailService emailService, IMediaPicker mediaPicker)
         {
+            Title = "UserProfile";
             this.databaseUserService = databaseUserService;
             this.userService = userService;
+            this.securityService = securityService;
             this.mediaPicker = mediaPicker;
+            this.emailService = emailService;
 
             User = userService.user; //Kopierar referensen av objektet, skapar ej en ny kopia av objektet. Typ som pekare i C++ när det gäller asignment mellan objekt i C#. -
             originalUserData = DeepCopy(User); //- Därför gör man en DeepCopy för att få en kopia av datan från ett annant objekt men ej referensen.
@@ -94,6 +108,9 @@ namespace Project_K.ViewModel
                 return;
             }
 
+            if (!await UINotification.CheckValidField(new List<string> { User.LastName }))
+                return;
+
             if (await databaseUserService.CheckExistingUserByUsername(User.Username))
             {
                 await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
@@ -129,6 +146,9 @@ namespace Project_K.ViewModel
                 return;
             }
 
+            if (!await UINotification.CheckValidField(new List<string> { User.Name }))
+                return;
+
             if (await UpdateUserDetails())
                 EditName = false;
         }
@@ -157,6 +177,10 @@ namespace Project_K.ViewModel
                 return;
             }
 
+            if (!await UINotification.CheckValidField(new List<string> { User.LastName }))
+                return;
+            
+
             if (await UpdateUserDetails())
                 EditLastName = false;
         }
@@ -170,11 +194,294 @@ namespace Project_K.ViewModel
             OnPropertyChanged(nameof(User));
         }
 
+        [RelayCommand]
+        async Task NavigateToChangePasswordSecurityCheckPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ChangePasswordSecurityCheckPage)}",true);
+        }
+
+        [RelayCommand]
+        async Task NavigateToUserProfilePage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(UserProfilePage)}",true);
+        }
+
+        async Task NavigateToChangePasswordPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ChangePasswordPage)}",true);
+        }
+
+        async Task NavigateToChangeEmailCurrentEmailTokenPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ChangeEmailCurrentEmailTokenPage)}",true);
+        }
+
+        async Task NavigateToChangeEmailNewEmailPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ChangeEmailNewEmailPage)}", true);
+        }
+
+        async Task NavigateToChangeEmailNewEmailTokenPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ChangeEmailNewEmailTokenPage)}", true);
+        }
+
+        [RelayCommand]
+        async Task PasswordSecurityCheck()
+        {
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredPassword }))
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                if (await securityService.VerifyPassword(User, enteredPassword))
+                {
+                    enteredPassword = "";
+                    await NavigateToChangePasswordPage();
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("ERROR", "Incorrect password, please try again", "OK");
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        async Task ChangePassword()
+        {
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { newPassword, confirmNewPassword }))
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                if (!newPassword.Equals(confirmNewPassword))
+                {
+                    await UINotification.DisplayAlertMessage("ERROR", $"The passwords do not match, please try again", "OK");
+                    return;
+                }
+
+                User.Password = await securityService.Hash(newPassword, User.Salt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+            if(await UpdateUserDetails())
+            {
+                await NavigateToUserProfilePage();
+                await emailService.SendEmail(User.Email, "Passwords have been changed", "The password associated with your account in Project_K has been changed, if this was not you then contact support immediately.");
+            }
+
+        }
+
+        [RelayCommand]
+        async Task SendTokenToCurrentEmail()
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                var token = await securityService.GenerateToken();
+
+                User.ResetToken = await securityService.Hash(token, User.Salt);
+                User.ResetDate = DateTime.Now;
+
+                await databaseUserService.UpdateUser(User);
+
+                await UINotification.DisplayAlertMessage("Email Sent", $"Email with a token will be sent to {User.Email}", "OK");
+
+                await NavigateToChangeEmailCurrentEmailTokenPage();
+
+                IsBusy = false;
+
+                await emailService.SendEmail(User.Email, "Change Email", $"Your email reset token : {token}. The validity of the token expires in five minutes");
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+          
+        }
+
+        [RelayCommand]
+        async Task VerifyCurrentEmailToken()
+        {
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredToken }))
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                TimeSpan timeSpan = DateTime.Now - User.ResetDate;
+
+                if (timeSpan.Minutes >= 5)
+                {
+                    User.ResetToken = "";
+
+                    await databaseUserService.UpdateUser(User);
+                    await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
+                    await NavigateToUserProfilePage();
+                }
+
+                if (await securityService.VerifyToken(User,enteredToken))
+                {
+                    enteredToken = "";
+                    await NavigateToChangeEmailNewEmailPage();
+
+                }
+                else
+                {
+                    await UINotification.DisplayAlertMessage("Invalid token", $"The token provided is not valid", "OK");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        async Task VerifyNewEmail()
+        {
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredEmail }))
+                return;
+
+            if (!await emailService.CheckEmailFormat(enteredEmail))
+            {
+                await UINotification.DisplayAlertMessage("ERROR", "The email provided is not in a correct format. Example on correct format -> (abc@abc.se)", "OK");
+                return;
+            }
+
+            if (await databaseUserService.CheckExistingUserByEmail(enteredEmail))
+            {
+                await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
+                return;
+            }
+
+            try
+            {
+                IsBusy = true;
+
+                var token = await securityService.GenerateToken();
+                User.ResetToken = await securityService.Hash(token, User.Salt);
+
+                await emailService.SendEmail(enteredEmail, "Change Email", $"Your email reset token : {token}. The validity of the token expires in five minutes");
+
+                User.ResetDate = DateTime.Now;
+
+                await databaseUserService.UpdateUser(User);
+
+                await NavigateToChangeEmailNewEmailTokenPage();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        async Task VerifyNewEmailToken()
+        {
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredToken }))
+                return;
+
+            try
+            {
+                IsBusy = true;
+
+                TimeSpan timeSpan = DateTime.Now - User.ResetDate;
+
+                if (timeSpan.Minutes >= 5)
+                {
+                    User.ResetToken = "";
+
+                    await databaseUserService.UpdateUser(User);
+                    await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
+                    await NavigateToUserProfilePage();
+                }
+
+                if (await securityService.VerifyToken(User, enteredToken))
+                {
+                    enteredToken = "";
+                    User.ResetToken = "";
+
+                    User.Email = enteredEmail;
+
+                    var oldEmail = originalUserData.Email;
+
+                    IsBusy = false;
+
+                    await UpdateUserDetails();
+
+                    await NavigateToUserProfilePage();
+
+                    await emailService.SendEmail(oldEmail, "Email has been changed", "The email associated with your account in Project_K has been changed, if this was not you then contact support immediately.");
+                }
+                else
+                {
+                    await UINotification.DisplayAlertMessage("Invalid token", $"The token provided is not valid", "OK");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+            
+        }
 
         [RelayCommand]
         async Task<bool> UpdateUserDetails()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { User.Username }))
+            if (IsBusy)
                 return false;
 
             try
@@ -189,6 +496,8 @@ namespace Project_K.ViewModel
                 {
                     originalUserData = DeepCopy(User);
                 });
+
+                OnPropertyChanged(nameof(User));
 
                 return true;
             }

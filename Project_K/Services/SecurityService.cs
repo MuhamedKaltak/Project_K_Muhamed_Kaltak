@@ -43,7 +43,7 @@ namespace Project_K.Services
             }
         }
 
-        public async Task<string> GenerateToken(User user)
+        public async Task<string> GenerateToken()
         {
             byte[] bytes;
             string bytesBase64Url;
@@ -68,9 +68,9 @@ namespace Project_K.Services
 
         public async Task<bool> VerifyToken(User user, string enteredToken)
         {
-            TimeSpan timeSpan = DateTime.Now - user.PasswordResetDate;
+            TimeSpan timeSpan = DateTime.Now - user.ResetDate;
 
-            if (user.PasswordResetToken == await Hash(enteredToken, user.Salt) && timeSpan.Minutes <= 5)
+            if (user.ResetToken == await Hash(enteredToken, user.Salt) && timeSpan.Minutes <= 5)
             {
                 return true;
             }

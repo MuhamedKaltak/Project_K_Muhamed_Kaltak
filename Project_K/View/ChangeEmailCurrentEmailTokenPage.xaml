@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Project_K.View.ChangeEmailCurrentEmailTokenPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    Title="{Binding Title}"
+    x:DataType="viewmodel:UserProfileViewModel">
+    <ScrollView>
+        <Grid RowDefinitions="*,Auto">
+
+            <Label
+                Margin="0,60,0,0"
+                FontSize="30"
+                HorizontalOptions="Center"
+                Text="Change Email"
+                VerticalOptions="StartAndExpand" />
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Code}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter the token that was sent to your email address"
+                            Style="{StaticResource Entry_General}"
+                            Text="{Binding enteredToken}" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+
+
+
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                Grid.Row="1"
+                Margin="0,20,0,20"
+                Style="{StaticResource RegisterHorizontalStackLayout}"
+                VerticalOptions="End">
+
+                <Button
+                    Command="{Binding NavigateBackToPreviousPageCommand}"
+                    Style="{StaticResource Button_General}"
+                    Text="Cancel" />
+                <Button
+                    Margin="20,0,0,0"
+                    Command="{Binding VerifyCurrentEmailTokenCommand}"
+                    Style="{StaticResource Button_General}"
+                    Text="Verify Token" />
+
+            </HorizontalStackLayout>
+
+            <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

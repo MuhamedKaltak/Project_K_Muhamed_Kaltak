@@ -19,6 +19,7 @@ namespace Project_K.ViewModel
         DatabaseUserService databaseUserService;
         RegisterService registerService;
         SecurityService securityService;
+        EmailService emailService;
 
 
         IMediaPicker mediaPicker;
@@ -37,12 +38,13 @@ namespace Project_K.ViewModel
         private byte[] profilePicture { get; set; }
 
 
-        public RegisterViewModel(DatabaseUserService databaseUserService,RegisterService registerService,SecurityService security ,IMediaPicker mediaPicker)
+        public RegisterViewModel(DatabaseUserService databaseUserService,RegisterService registerService,SecurityService security, EmailService emailService ,IMediaPicker mediaPicker)
         {
             Title = "Register a new account";
             this.databaseUserService = databaseUserService;
             this.registerService = registerService;
             this.securityService = security;
+            this.emailService = emailService;
             this.mediaPicker = mediaPicker;
             imageToShowSource = "user.png";
         }
@@ -62,7 +64,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword) || !await registerService.IsEmailInValidFormat(email))
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword) || !await emailService.CheckEmailFormat(email))
                 return;
 
             if(await databaseUserService.CheckExistingUserByEmail(email))

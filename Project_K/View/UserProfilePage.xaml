@@ -97,13 +97,17 @@
                         <Entry
                             IsPassword="True"
                             IsReadOnly="True"
-                            Placeholder="Enter your email adress"
+                            Placeholder="Enter your password"
                             Style="{StaticResource Entry_General}"
                             Text="{Binding User.Password}" />
                     </Frame>
 
                     <Grid>
-                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label Style="{StaticResource Label_Edit_FAS}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateToChangePasswordSecurityCheckPageCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Grid>
 
                 </HorizontalStackLayout>
@@ -215,7 +219,13 @@
                     </Frame>
 
                     <Grid>
-                        <Label Style="{StaticResource Label_Edit_FAS}" />
+                        <Label Style="{StaticResource Label_Edit_FAS}">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendTokenToCurrentEmailCommand}" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
                     </Grid>
 
                 </HorizontalStackLayout>

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Project_K.Utilities;
 using Project_K.Model;
+using System.Text.RegularExpressions;
 
 namespace Project_K.Services
 {
@@ -14,7 +15,6 @@ namespace Project_K.Services
     {
         public async Task SendEmail(string recipientEmail, string subject, string body)
         {
-
             try
             {
                 var smtpClient = new SmtpClient("smtp.office365.com")
@@ -41,6 +41,15 @@ namespace Project_K.Services
                 await UINotification.DisplayAlertMessage("ERROR", $"Could not send email, exception : {ex.Message}", "OK");
             }
         }
-     
+
+        public async Task<bool> CheckEmailFormat(string email)
+        {
+            return await Task.Run(() =>
+            {
+                string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                return Regex.IsMatch(email, pattern);
+            });
+        }
+
     }
 }
