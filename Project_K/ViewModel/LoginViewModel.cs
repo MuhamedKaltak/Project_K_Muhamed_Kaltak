@@ -77,9 +77,10 @@ namespace Project_K.ViewModel
 
                 if (await securityService.VerifyPassword(user, password))
                 {
-                    //await Shell.Current.DisplayAlert("LOGGA IN", "LOGGA IN", "OK");
                     userService.user = user;
-                    await Shell.Current.GoToAsync("//Home");
+
+                    Application.Current.MainPage = new AppShellMain();
+                    //await Shell.Current.GoToAsync("//Home");
                 }
                 else
                 {

@@ -231,6 +231,11 @@
                 </HorizontalStackLayout>
 
 
+                <Button
+                    Command="{Binding LogoutCommand}"
+                    Style="{StaticResource Button_General}"
+                    Text="Logout" />
+
             </VerticalStackLayout>
 
             <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />

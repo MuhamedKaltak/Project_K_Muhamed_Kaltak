@@ -70,6 +70,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AppShellMain.xaml.cs">
+	    <DependentUpon>AppShellMain.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="AppShellLogin.xaml.cs">
+	    <DependentUpon>AppShellLogin.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AppShellLogin.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\ChangeEmailCurrentEmailTokenPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

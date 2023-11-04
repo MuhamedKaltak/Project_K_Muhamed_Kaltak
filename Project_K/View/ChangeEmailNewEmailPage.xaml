@@ -58,7 +58,7 @@
                     Margin="20,0,0,0"
                     Command="{Binding VerifyNewEmailCommand}"
                     Style="{StaticResource Button_General}"
-                    Text="Verify Token" />
+                    Text="Next" />
 
             </HorizontalStackLayout>
 

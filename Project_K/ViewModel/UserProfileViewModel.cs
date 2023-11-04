@@ -74,7 +74,15 @@ namespace Project_K.ViewModel
             User = userService.user; //Kopierar referensen av objektet, skapar ej en ny kopia av objektet. Typ som pekare i C++ när det gäller asignment mellan objekt i C#. -
             originalUserData = DeepCopy(User); //- Därför gör man en DeepCopy för att få en kopia av datan från ett annant objekt men ej referensen.
 
-            profileImage = ImageSource.FromStream(() => new MemoryStream(user.ProfilePicture));
+            if (user.ProfilePicture == null)
+            {
+                profileImage = "user.png";
+            }
+            else
+            {
+                profileImage = ImageSource.FromStream(() => new MemoryStream(user.ProfilePicture));
+
+            }
         }
 
         [RelayCommand]
@@ -476,6 +484,27 @@ namespace Project_K.ViewModel
                 IsBusy = false;
             }
             
+        }
+
+        [RelayCommand]
+        async Task Logout()
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+               
+                 userService.user = null;
+
+                 Application.Current.MainPage = new AppShellLogin();
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
+            }
         }
 
         [RelayCommand]

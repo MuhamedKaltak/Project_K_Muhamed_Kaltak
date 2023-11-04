@@ -32,7 +32,7 @@
 
 
                         <Entry
-                            Placeholder="Enter the token that was sent to your email address"
+                            Placeholder="Enter the token"
                             Style="{StaticResource Entry_General}"
                             Text="{Binding enteredToken}" />
                     </Frame>
