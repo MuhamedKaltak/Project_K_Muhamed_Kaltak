@@ -25,6 +25,17 @@
             <Tab.Icon>
                 <FontImageSource
                     FontFamily="FAS"
+                    Glyph="{x:Static fontAwesome:FontAwesomeIcons.Pencil}"
+                    Color="{AppThemeBinding Dark=White,
+                                            Light={StaticResource SystemGray5Dark}}" />
+            </Tab.Icon>
+            <ShellContent Title="ProductCreation" ContentTemplate="{DataTemplate views:ProductCreationPage}" />
+        </Tab>
+
+        <Tab>
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="FAS"
                     Glyph="{x:Static fontAwesome:FontAwesomeIcons.User}"
                     Color="{AppThemeBinding Dark=White,
                                             Light={StaticResource SystemGray5Dark}}" />
