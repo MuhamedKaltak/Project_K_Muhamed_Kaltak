@@ -12,7 +12,7 @@ namespace Project_K.Model
         string Name { get; set; }
         string Description { get; set; }
         float Price { get; set; }
-        public byte[] Picture { get; set; }
-        public string Discriminator { get; set; }
+        byte[] Picture { get; set; }
+        string Discriminator { get; set; }
     }
 }

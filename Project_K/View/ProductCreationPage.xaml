@@ -3,11 +3,127 @@
     x:Class="Project_K.View.ProductCreationPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="ProductCreationPage">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:fontAwesome="clr-namespace:Project_K.Utilities"
+    xmlns:viewmodel="clr-namespace:Project_K.ViewModel"
+    Title="RegisterPage"
+    x:DataType="viewmodel:ProductCreationViewModel">
+    <ScrollView>
+        <Grid RowDefinitions="*,Auto">
+
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                HorizontalOptions="Center">
+                <Label
+                    FontSize="30"
+                    HorizontalOptions="Center"
+                    Text="Publish a product" />
+
+
+                <Border Margin="0,60,0,0" Style="{StaticResource Border_ProfileImage}">
+
+
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="200"
+                        Source="cube.png"
+                        WidthRequest="200" />
+
+                </Border>
+
+
+
+                <Frame Margin="0,40,0,0" Style="{StaticResource Frame_General}">
+
+                    <Button
+                        Style="{StaticResource Button_General}"
+                        Text="Put up an image of your product"
+                        WidthRequest="300" />
+                </Frame>
+
+                <Frame Margin="0,40,0,0" Style="{StaticResource Frame_General}">
+
+                    <Picker Title="Picker" WidthRequest="300">
+
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Baboon</x:String>
+                                <x:String>Capuchin Monkey</x:String>
+                                <x:String>Blue Monkey</x:String>
+                                <x:String>Squirrel Monkey</x:String>
+                                <x:String>Golden Lion Tamarin</x:String>
+                                <x:String>Howler Monkey</x:String>
+                                <x:String>Japanese Macaque</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Frame>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Cube}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Name of the product"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Signature}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Editor
+                            HeightRequest="100"
+                            MaxLength="200"
+                            Placeholder="Enter a description of your product" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.MoneyBills}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Enter the price"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}" />
+
+
+                <HorizontalStackLayout
+                    Grid.Row="1"
+                    Margin="0,0,0,20"
+                    Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Button
+                        Margin="20,0,0,0"
+                        Style="{StaticResource Button_General}"
+                        Text="Publish Product" />
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+            <ActivityIndicator Style="{StaticResource ActivityIndicator_General}" />
+
+        </Grid>
+    </ScrollView>
+
+
+
 </ContentPage>

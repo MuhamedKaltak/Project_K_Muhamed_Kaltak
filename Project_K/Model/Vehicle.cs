@@ -15,10 +15,10 @@ namespace Project_K.Model
         public override byte[] Picture { get; set; }
         public override string Discriminator { get; set; }
 
-        public int Year { get; set; }
-        public string Manufacturer {  get; set; }
-        public int MaxSpeed { get; set; }
-        public int NumSeats { get; set; }
+        protected int Year { get; set; }
+        protected string Manufacturer {  get; set; }
+        protected int MaxSpeed { get; set; }
+        protected int NumSeats { get; set; }
 
 
     }
