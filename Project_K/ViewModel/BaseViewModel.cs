@@ -19,10 +19,22 @@ namespace Project_K.ViewModel
 
         public bool IsNotBusy => !IsBusy;
 
+        [ObservableProperty]
+        ImageSource imageToShowTabBar;
+
         [RelayCommand]
         protected async Task NavigateBackToPreviousPage()
         {
             await Shell.Current.GoToAsync("..");
+        }
+
+        public void TabBarRefreshImage_WorkAround() //Workaround for .NET MAUI BUG, images not showing when setting ImageSource to another picture and reappearing to the same tab
+        {
+            ImageSource temp = ImageToShowTabBar;
+
+            ImageToShowTabBar = null;
+
+            ImageToShowTabBar = temp;
         }
     }
 }

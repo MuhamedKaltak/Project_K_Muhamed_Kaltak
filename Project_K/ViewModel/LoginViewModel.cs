@@ -71,7 +71,11 @@ namespace Project_K.ViewModel
 
                 if (username == ADMIN_USERNAME_PASSWORD && password == ADMIN_USERNAME_PASSWORD) //Primarly used to avoid slow emulator hashing speed
                 {
-                    await Shell.Current.GoToAsync("//Home");
+                    userService.user = user;
+
+                    Application.Current.MainPage = new AppShellMain();
+                    //await Shell.Current.GoToAsync("//Home");
+
                     return;
                 }
 

@@ -74,13 +74,14 @@ namespace Project_K.ViewModel
             User = userService.user; //Kopierar referensen av objektet, skapar ej en ny kopia av objektet. Typ som pekare i C++ när det gäller asignment mellan objekt i C#. -
             originalUserData = DeepCopy(User); //- Därför gör man en DeepCopy för att få en kopia av datan från ett annant objekt men ej referensen.
 
-            if (user.ProfilePicture == null)
+
+            if (User.ProfilePicture == null)
             {
-                profileImage = "user.png";
+                ImageToShowTabBar = "user.png";
             }
             else
             {
-                profileImage = ImageSource.FromStream(() => new MemoryStream(user.ProfilePicture));
+                ImageToShowTabBar = ImageSource.FromStream(() => new MemoryStream(User.ProfilePicture));
 
             }
         }
@@ -94,11 +95,12 @@ namespace Project_K.ViewModel
 
             picture = ImageTool.CompressAndResizeImage(file.FullPath, 200, 200, 80);
 
-            userService.user.ProfilePicture = picture;
+            User.ProfilePicture = picture;
 
-            await databaseUserService.UpdateUser(userService.user);
+            await databaseUserService.UpdateUser(User);
 
-            ProfileImage = ImageSource.FromStream(() => new MemoryStream(picture));
+            ImageToShowTabBar = ImageSource.FromStream(() => new MemoryStream(picture));
+
         }
 
         [RelayCommand]
@@ -548,6 +550,12 @@ namespace Project_K.ViewModel
         {
             var json = JsonSerializer.Serialize(source);
             return JsonSerializer.Deserialize<User>(json);
+        }
+
+        [RelayCommand]
+        public void RefreshImage() //Workaround for .NET MAUI BUG, images not showing when changing ImageSource to another picture and reappearing to the same tab
+        {
+            TabBarRefreshImage_WorkAround();
         }
 
     }
