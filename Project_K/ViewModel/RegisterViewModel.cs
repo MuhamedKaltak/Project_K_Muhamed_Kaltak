@@ -64,8 +64,14 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword) || !await emailService.CheckEmailFormat(email))
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword))
                 return;
+
+            if (!await emailService.CheckEmailFormat(email))
+            {
+                await UINotification.DisplayAlertMessage("ERROR", "The email provided is in an incorrect format, should be in this format -> (abc.def.se)","OK");
+                return;
+            }
 
             if(await databaseUserService.CheckExistingUserByEmail(email))
             {
