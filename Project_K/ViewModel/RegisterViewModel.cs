@@ -17,7 +17,6 @@ namespace Project_K.ViewModel
     public partial class RegisterViewModel : BaseViewModel
     {
         DatabaseUserService databaseUserService;
-        RegisterService registerService;
         SecurityService securityService;
         EmailService emailService;
 
@@ -38,12 +37,11 @@ namespace Project_K.ViewModel
         private byte[] profilePicture { get; set; }
 
 
-        public RegisterViewModel(DatabaseUserService databaseUserService,RegisterService registerService,SecurityService security, EmailService emailService ,IMediaPicker mediaPicker)
+        public RegisterViewModel(DatabaseUserService databaseUserService,SecurityService securityService, EmailService emailService ,IMediaPicker mediaPicker)
         {
             Title = "Register a new account";
             this.databaseUserService = databaseUserService;
-            this.registerService = registerService;
-            this.securityService = security;
+            this.securityService = securityService;
             this.emailService = emailService;
             this.mediaPicker = mediaPicker;
             imageToShowSource = "user.png";
@@ -64,7 +62,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         async Task RegisterNewUser()
         {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, name, lastName, email }) || !await registerService.ArePasswordsMatching(password, confirmPassword))
+            if (IsBusy || !await UINotification.CheckValidField(new List<string> { username, password, confirmPassword, name, lastName, email }) || !await ArePasswordsMatching())
                 return;
 
             if (!await emailService.CheckEmailFormat(email))
@@ -114,6 +112,16 @@ namespace Project_K.ViewModel
                 await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
             }
             finally { IsBusy = false; }
+        }
+
+        private async Task<bool> ArePasswordsMatching()
+        {
+            if (password.Equals(confirmPassword))
+                return true;
+
+            await UINotification.DisplayAlertMessage("ERROR", "The passwords do not match", "OK");
+
+            return false;
         }
     }
 }

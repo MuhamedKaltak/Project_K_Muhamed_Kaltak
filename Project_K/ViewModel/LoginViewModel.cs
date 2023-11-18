@@ -69,15 +69,15 @@ namespace Project_K.ViewModel
                     return;
                 }
 
-                if (username == ADMIN_USERNAME_PASSWORD && password == ADMIN_USERNAME_PASSWORD) //Primarly used to avoid slow emulator hashing speed
-                {
-                    userService.user = user;
+                //if (username == ADMIN_USERNAME_PASSWORD && password == ADMIN_USERNAME_PASSWORD) //Primarly used to avoid slow emulator hashing speed
+                //{
+                //    userService.user = user;
 
-                    Application.Current.MainPage = new AppShellMain();
-                    //await Shell.Current.GoToAsync("//Home");
+                //    Application.Current.MainPage = new AppShellMain();
+                //    //await Shell.Current.GoToAsync("//Home");
 
-                    return;
-                }
+                //    return;
+                //}
 
                 if (await securityService.VerifyPassword(user, password))
                 {

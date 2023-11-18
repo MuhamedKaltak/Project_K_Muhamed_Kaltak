@@ -25,7 +25,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         protected async Task NavigateBackToPreviousPage()
         {
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("..",true);
         }
 
         public void TabBarRefreshImage_WorkAround() //Workaround for .NET MAUI BUG, images not showing when setting ImageSource to another picture and reappearing to the same tab

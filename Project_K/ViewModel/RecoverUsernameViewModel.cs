@@ -42,10 +42,12 @@ namespace Project_K.ViewModel
             {
                 IsBusy = true;
 
-                await emailService.SendEmail(user.Email,"Recovery of your username",$"Your username in Project_K is: {user.Username}");
+                await UINotification.DisplayAlertMessage("Email Sent", $"Email with your username details will be sent to {user.Email} ", "OK");
 
-                await UINotification.DisplayAlertMessage("Email Sent", $"Email has been sent to {user.Email} ", "OK");
                 await NavigateBackToPreviousPage();
+
+                await emailService.SendEmail(user.Email, "Recovery of your username", $"Your username in Project_K is: {user.Username}");
+
             }
             catch (Exception ex)
             {

@@ -80,6 +80,10 @@ namespace Project_K.ViewModel
                     return;
                 }
 
+                await UINotification.DisplayAlertMessage("Email Sent", $"Email with a token will be sent to {User.Email}", "OK");
+
+                await NavigateToResetPasswordTokenPage(User);
+
                 var token = await securityService.GenerateToken();
 
                 User.ResetToken = await securityService.Hash(token,User.Salt);
@@ -88,9 +92,6 @@ namespace Project_K.ViewModel
                 await databaseUserService.UpdateUser(User);
 
                 await emailService.SendEmail(User.Email, "Reset Password", $"Your password reset token : {token}. The validity of the token expires in five minutes");
-                await UINotification.DisplayAlertMessage("Email Sent", $"Email with a token has been sent to {  User.Email}", "OK");
-
-                await NavigateToResetPasswordTokenPage(User);
 
             }
             catch (Exception ex)

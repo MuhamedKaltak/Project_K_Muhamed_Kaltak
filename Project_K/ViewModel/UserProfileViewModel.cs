@@ -82,7 +82,6 @@ namespace Project_K.ViewModel
             else
             {
                 ImageToShowTabBar = ImageSource.FromStream(() => new MemoryStream(User.ProfilePicture));
-
             }
         }
 
@@ -496,17 +495,18 @@ namespace Project_K.ViewModel
 
             try
             {
-               
-                 userService.user = null;
+                IsBusy = true;
 
-                 Application.Current.MainPage = new AppShellLogin();
-                
+                userService.user = null;
+
+                Application.Current.MainPage = new AppShellLogin();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
                 await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
             }
+            finally { IsBusy = false; }
         }
 
         [RelayCommand]
@@ -523,11 +523,8 @@ namespace Project_K.ViewModel
 
                 await UINotification.DisplayAlertMessage("Updated Data", $"Succesfully updated your account details", "OK");
 
-                await Task.Run(() =>
-                {
-                    originalUserData = DeepCopy(User);
-                });
-
+                originalUserData = DeepCopy(User);
+                
                 OnPropertyChanged(nameof(User));
 
                 return true;

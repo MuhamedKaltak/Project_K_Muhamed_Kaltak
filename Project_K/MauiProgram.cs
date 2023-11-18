@@ -27,7 +27,6 @@ namespace Project_K
 		builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddTransient<RegisterService>();
             builder.Services.AddTransient<SecurityService>();
             builder.Services.AddTransient<EmailService>();
             builder.Services.AddTransient<ProductFactoryService>();

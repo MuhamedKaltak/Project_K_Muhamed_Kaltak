@@ -14,49 +14,63 @@ namespace Project_K.Services
     {
         public async Task<string> Hash(string value,string salt)
         {
-            int memorySize = 65536; 
-            int iterations = 4; 
-
-            using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(value)))
+            return await Task.Run(() =>
             {
-                argon2.Salt = Encoding.UTF8.GetBytes(salt);
-                argon2.DegreeOfParallelism = 16; 
+                int memorySize = 65536;
+                int iterations = 4;
 
-                //(i KB)
-                argon2.MemorySize = memorySize;
+                using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(value)))
+                {
+                    argon2.Salt = Encoding.UTF8.GetBytes(salt);
+                    argon2.DegreeOfParallelism = 16;
 
-                
-                argon2.Iterations = iterations;
+                    //(i KB)
+                    argon2.MemorySize = memorySize;
 
-                byte[] hashBytes = await Task.Run(() => argon2.GetBytes(32)); // 32 bytes = 256 bits
-                return Convert.ToBase64String(hashBytes);
-            }
+
+                    argon2.Iterations = iterations;
+
+                    byte[] hashBytes = argon2.GetBytes(32); // 32 bytes = 256 bits
+                    return Convert.ToBase64String(hashBytes);
+                }
+            });
+
+            
         }
 
         public async Task<string> GenerateRandomSalt(int size)
         {
-            using (var rng = RandomNumberGenerator.Create())
+            return await Task.Run(() =>
             {
-                byte[] saltBytes = new byte[size];
-                await Task.Run(() => rng.GetBytes(saltBytes));
-                return Convert.ToBase64String(saltBytes);
-            }
+                using (var rng = RandomNumberGenerator.Create())
+                {
+                    byte[] saltBytes = new byte[size];
+                    rng.GetBytes(saltBytes);
+                    return Convert.ToBase64String(saltBytes);
+                }
+            });
+
+            
         }
 
         public async Task<string> GenerateToken()
         {
-            byte[] bytes;
-            string bytesBase64Url;
-
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            return await Task.Run(() =>
             {
-                bytes = new byte[12];
-                await Task.Run(() => rng.GetBytes(bytes)); // Use Task.Run to run the synchronous operation asynchronously.
+                byte[] bytes;
+                string bytesBase64Url;
 
-                bytesBase64Url = Convert.ToBase64String(bytes).Replace('+', '-').Replace('/', '_');
-            }
+                using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+                {
+                    bytes = new byte[12];
+                    rng.GetBytes(bytes); // Use Task.Run to run the synchronous operation asynchronously.
 
-            return bytesBase64Url;
+                    bytesBase64Url = Convert.ToBase64String(bytes).Replace('+', '-').Replace('/', '_');
+                }
+
+                return bytesBase64Url;
+            });
+            
         }
 
         public async Task<bool> VerifyPassword(User user, string password)
