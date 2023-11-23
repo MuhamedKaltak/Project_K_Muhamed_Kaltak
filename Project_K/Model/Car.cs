@@ -9,6 +9,6 @@ namespace Project_K.Model
     public class Car : Vehicle
     {
         public bool FourWheelDriven { get; set; }
-        public int NumDoors { get; set; }
+        public bool Electric {  get; set; }
     }
 }

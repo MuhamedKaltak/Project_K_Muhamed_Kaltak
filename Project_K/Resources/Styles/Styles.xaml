@@ -98,6 +98,13 @@
         <Setter Property="WidthRequest" Value="320" />
     </Style>
 
+    <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="Red" />
+    </Style>
+
+    <Style x:Key="ValidEntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="Green" />
+    </Style>
 
     <Style x:Key="Entry_General" TargetType="Entry">
         <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
@@ -106,10 +113,25 @@
         <Setter Property="ReturnType" Value="{StaticResource Black}" />
     </Style>
 
+    <Style x:Key="Entry_General_ReadOnly" TargetType="Entry">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
+        <Setter Property="ReturnType" Value="Go" />
+        <Setter Property="Placeholder" Value="PLACEHOLDER" />
+        <Setter Property="ReturnType" Value="{StaticResource Black}" />
+    </Style>
+
+
     <Style x:Key="Label_Link" TargetType="Label">
         <Setter Property="Margin" Value="0" />
         <Setter Property="TextColor" Value="{StaticResource Blue100Accent}" />
         <Setter Property="Text" Value="PLACEHOLDER" />
+    </Style>
+
+    <Style x:Key="Editor_General" TargetType="Editor">
+        <Setter Property="HeightRequest" Value="100" />
+        <Setter Property="MaxLength" Value="200" />
+        <Setter Property="Placeholder" Value="PLACEHOLDER" />
     </Style>
 
 

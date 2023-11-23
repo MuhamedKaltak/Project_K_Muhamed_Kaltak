@@ -11,7 +11,5 @@ namespace Project_K.Enums
         Car,
         Motorcycle,
         Test0,
-        Test1,
-        Test2,
     }
 }

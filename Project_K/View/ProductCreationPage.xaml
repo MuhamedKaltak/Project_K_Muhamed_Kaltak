@@ -45,16 +45,29 @@
 
                 <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}">
 
-                    <Picker ItemsSource="{Binding ProductCategories}" SelectedIndex="{Binding ProductCategoryIndex}" Margin="0,0,20,0" Title="Picker" WidthRequest="125">
+                    <Picker
+                        Title="Picker"
+                        Margin="0,0,20,0"
+                        ItemsSource="{Binding ProductCategories}"
+                        SelectedIndex="{Binding ProductCategoryIndex}"
+                        WidthRequest="125">
 
                         <Picker.Behaviors>
-                            <toolkit:EventToCommandBehavior Command="{Binding ProcessProductCategoryCommand}" EventName="SelectedIndexChanged"/>
+                            <toolkit:EventToCommandBehavior Command="{Binding ProcessProductCategoryCommand}" EventName="SelectedIndexChanged" />
                         </Picker.Behaviors>
                     </Picker>
 
-                    <Picker ItemsSource="{Binding ProductItems}" IsEnabled="{Binding HasSelectedCategory}" Title="Picker" WidthRequest="125">
+                    <Picker
+                        Title="Picker"
+                        IsEnabled="{Binding HasSelectedCategory}"
+                        ItemsSource="{Binding ProductItems}"
+                        SelectedIndex="{Binding ProductItemIndex}"
+                        WidthRequest="125">
 
-                        
+                        <Picker.Behaviors>
+                            <toolkit:EventToCommandBehavior Command="{Binding ProcessProductItemCommand}" EventName="SelectedIndexChanged" />
+                        </Picker.Behaviors>
+
                     </Picker>
 
                 </HorizontalStackLayout>
@@ -80,10 +93,7 @@
                     <Frame Style="{StaticResource Frame_General}">
 
 
-                        <Editor
-                            HeightRequest="100"
-                            MaxLength="200"
-                            Placeholder="Enter a description of your product" />
+                        <Editor Placeholder="Enter a description of your product" Style="{StaticResource Editor_General}" />
                     </Frame>
                 </HorizontalStackLayout>
 
@@ -98,16 +108,127 @@
                             Keyboard="Numeric"
                             Placeholder="Enter the price"
                             Style="{StaticResource Entry_General}"
+                            Text="">
+
+                            <Entry.Behaviors>
+                                <!--  Efter jag satt detta i Styles.Xaml ->  (Style x:Key="Entry_General -> Style.Behaviors -> denna behavior) så körde behaviorn inkorrekt, verkar vara en .NET MAUI bug  -->
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedVehicleCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.CalendarDays}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Enter the year of the vehicle"
+                            Style="{StaticResource Entry_General}"
+                            Text="">
+
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedVehicleCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Industry}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter the name of the manufacturer"
+                            Style="{StaticResource Entry_General}"
                             Text="" />
                     </Frame>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Style="{StaticResource RegisterHorizontalStackLayout}" />
 
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedVehicleCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Gauge}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Enter the max speed of the vehicle"
+                            Style="{StaticResource Entry_General}"
+                            Text="">
+
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+                <!--  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww  -->
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedCarItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label
+                        Margin="40,0,0,0"
+                        Style="{StaticResource Label_FontAwesomeIcon_Solid}"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Gears}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            HorizontalTextAlignment="Center"
+                            IsReadOnly="True"
+                            Style="{StaticResource Entry_General_ReadOnly}"
+                            Text="Four-Wheel-Driven" />
+                    </Frame>
+
+                    <CheckBox />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedCarItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label
+                        Margin="40,0,0,0"
+                        Style="{StaticResource Label_FontAwesomeIcon_Solid}"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Bolt}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            HorizontalTextAlignment="Center"
+                            IsReadOnly="True"
+                            Style="{StaticResource Entry_General_ReadOnly}"
+                            Text="Electric" />
+                    </Frame>
+
+                    <CheckBox />
+                </HorizontalStackLayout>
 
                 <HorizontalStackLayout
                     Grid.Row="1"
-                    Margin="0,0,0,20"
+                    Margin="0,40,0,20"
                     Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Button

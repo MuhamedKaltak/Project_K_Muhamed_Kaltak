@@ -18,7 +18,6 @@ namespace Project_K.Model
         protected int Year { get; set; }
         protected string Manufacturer {  get; set; }
         protected int MaxSpeed { get; set; }
-        protected int NumSeats { get; set; }
 
 
     }

@@ -29,7 +29,6 @@ namespace Project_K
 
             builder.Services.AddTransient<SecurityService>();
             builder.Services.AddTransient<EmailService>();
-            builder.Services.AddTransient<ProductFactoryService>();
 
             builder.Services.AddSingleton<DatabaseUserService>();
             builder.Services.AddSingleton<UserService>();
