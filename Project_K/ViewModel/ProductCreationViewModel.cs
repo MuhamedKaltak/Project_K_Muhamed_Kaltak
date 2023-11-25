@@ -81,7 +81,6 @@ namespace Project_K.ViewModel
             {
                 { ProductItemEnum.Car, hasSelectedCarItem },
                 { ProductItemEnum.Motorcycle, hasSelectedMotorcycleItem },
-                { ProductItemEnum.Test0, hasSelectedTestItem } //TA BORT <----------------------------------------
             };
         }
 
@@ -90,7 +89,7 @@ namespace Project_K.ViewModel
         public void ProcessProductCategory()
         {
 
-            if (ProductCategoryIndex == -1 || currentProductCategorySelected == CategoryFieldMappingDictionary[ProductCategories[ProductCategoryIndex]])
+            if (ProductCategoryIndex == -1)
                 return;
 
 
@@ -122,7 +121,7 @@ namespace Project_K.ViewModel
         [RelayCommand]
         public void ProcessProductItem()
         {
-            if (ProductItemIndex == -1 || currentProductItemSelected == ProductFieldMappingDictionary[ProductItems[ProductItemIndex]])
+            if (ProductItemIndex == -1)
                 return;
 
             currentProductItemSelected.Value = false;
