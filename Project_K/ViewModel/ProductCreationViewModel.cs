@@ -23,17 +23,20 @@ namespace Project_K.ViewModel
         //Product category UI databinding
         [ObservableProperty]
         BoolReference hasSelectedVehicleCategory = new BoolReference();
-
-        //TA BORT <-> TESTING <----------------------------------------
-        BoolReference hasSelectedTestCategory = new BoolReference();
-        BoolReference hasSelectedTestItem = new BoolReference();
+        [ObservableProperty]
+        BoolReference hasSelectedElectronicCategory = new BoolReference();
 
         //Product item UI databinding
+        //Vehicle
         [ObservableProperty]
         BoolReference hasSelectedCarItem = new BoolReference();
-
         [ObservableProperty]
         BoolReference hasSelectedMotorcycleItem = new BoolReference();
+        //Electronics
+        [ObservableProperty]
+        BoolReference hasSelectedComputerItem = new BoolReference();
+        [ObservableProperty]
+        BoolReference hasSelectedPhoneItem = new BoolReference();
 
         [ObservableProperty]
         int productCategoryIndex = -1;
@@ -66,21 +69,23 @@ namespace Project_K.ViewModel
         {
             CategoryItemMappingDictionary = new Dictionary<ProductCategoryEnum, List<ProductItemEnum>>
             {
+                { ProductCategoryEnum.Electronic, new List<ProductItemEnum> { ProductItemEnum.Computer, ProductItemEnum.Phone} },
                 { ProductCategoryEnum.Vehicle, new List<ProductItemEnum> { ProductItemEnum.Car, ProductItemEnum.Motorcycle } },
-                { ProductCategoryEnum.Test, new List<ProductItemEnum> { ProductItemEnum.Test0} }, //TA BORT <----------------------------------------
             };
 
 
             CategoryFieldMappingDictionary = new Dictionary<ProductCategoryEnum, BoolReference>
             {
+                { ProductCategoryEnum.Electronic, hasSelectedElectronicCategory },
                 { ProductCategoryEnum.Vehicle, hasSelectedVehicleCategory },
-                { ProductCategoryEnum.Test, hasSelectedTestCategory } //TA BORT <----------------------------------------
             };
 
             ProductFieldMappingDictionary = new Dictionary<ProductItemEnum, BoolReference>
             {
                 { ProductItemEnum.Car, hasSelectedCarItem },
                 { ProductItemEnum.Motorcycle, hasSelectedMotorcycleItem },
+                { ProductItemEnum.Computer, hasSelectedComputerItem },
+                { ProductItemEnum.Phone, hasSelectedPhoneItem },
             };
         }
 
@@ -102,8 +107,6 @@ namespace Project_K.ViewModel
 
             if (CategoryItemMappingDictionary.TryGetValue(ProductCategories[ProductCategoryIndex], out var items))
             {
-                
-
                 foreach (var item in items)
                 {
                     ProductItems.Add(item);

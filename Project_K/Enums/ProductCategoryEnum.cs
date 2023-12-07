@@ -8,7 +8,7 @@ namespace Project_K.Enums
 {
     public enum ProductCategoryEnum
     {
+        Electronic,
         Vehicle,
-        Test
     }
 }

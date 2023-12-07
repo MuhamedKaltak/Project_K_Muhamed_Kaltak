@@ -121,6 +121,8 @@
                     </Frame>
                 </HorizontalStackLayout>
 
+                <!--  Category - Vehicle  -->
+
                 <HorizontalStackLayout IsVisible="{Binding HasSelectedVehicleCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
 
                     <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.CalendarDays}" />
@@ -183,8 +185,84 @@
                     </Frame>
                 </HorizontalStackLayout>
 
+                <!--  Category - Electronic  -->
 
-                <!--  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww  -->
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedElectronicCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Brand}" Text="{x:Static fontAwesome:FontAwesomeIcons.Windows}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter the operating system of the device"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedElectronicCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Microchip}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter the name of the processor"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedElectronicCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Memory}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Enter the amount of ram"
+                            Style="{StaticResource Entry_General}"
+                            Text="">
+
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedElectronicCategory.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Database}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Keyboard="Numeric"
+                            Placeholder="Enter the amount of storage in GB"
+                            Style="{StaticResource Entry_General}"
+                            Text="">
+
+                            <Entry.Behaviors>
+                                <toolkit:NumericValidationBehavior
+                                    Flags="ValidateOnValueChanged"
+                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                    ValidStyle="{StaticResource ValidEntryStyle}" />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </HorizontalStackLayout>
+
+
+                <!--  Item - Car  -->
 
                 <HorizontalStackLayout IsVisible="{Binding HasSelectedCarItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
 
@@ -224,6 +302,65 @@
                     </Frame>
 
                     <CheckBox />
+                </HorizontalStackLayout>
+
+                <!--  Item - Motorcycle  -->
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedMotorcycleItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label
+                        Margin="40,0,0,0"
+                        Style="{StaticResource Label_FontAwesomeIcon_Solid}"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Motorcycle}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            HorizontalTextAlignment="Center"
+                            IsReadOnly="True"
+                            Style="{StaticResource Entry_General_ReadOnly}"
+                            Text="Has-Fairing" />
+                    </Frame>
+
+                    <CheckBox />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedMotorcycleItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label
+                        Margin="40,0,0,0"
+                        Style="{StaticResource Label_FontAwesomeIcon_Solid}"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Road}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            HorizontalTextAlignment="Center"
+                            IsReadOnly="True"
+                            Style="{StaticResource Entry_General_ReadOnly}"
+                            Text="Is-Off-Road" />
+                    </Frame>
+
+                    <CheckBox />
+                </HorizontalStackLayout>
+
+                <!--  Item - Computer  -->
+
+
+                <HorizontalStackLayout IsVisible="{Binding HasSelectedComputerItem.Value}" Style="{StaticResource RegisterHorizontalStackLayout}">
+
+                    <Label Style="{StaticResource Label_FontAwesomeIcon_Solid}" Text="{x:Static fontAwesome:FontAwesomeIcons.Computer}" />
+
+                    <Frame Style="{StaticResource Frame_General}">
+
+
+                        <Entry
+                            Placeholder="Enter the name of the graphics card"
+                            Style="{StaticResource Entry_General}"
+                            Text="" />
+                    </Frame>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout

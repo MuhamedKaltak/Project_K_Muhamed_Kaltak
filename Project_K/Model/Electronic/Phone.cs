@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_K.Enums
+namespace Project_K.Model.Electronic
 {
-    public enum ProductItemEnum
+    public class Phone : Electronic
     {
-        Car,
-        Motorcycle,
-        Computer,
-        Phone
     }
 }

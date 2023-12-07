@@ -55,6 +55,12 @@
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
+    <Style x:Key="Label_FontAwesomeIcon_Brand" TargetType="Label">
+        <Setter Property="FontFamily" Value="FAB" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
     <Style x:Key="Label_Edit_FAS" TargetType="Label">
         <Setter Property="IsEnabled" Value="{Binding IsNotBusy}" />
         <Setter Property="Text" Value="{x:Static fontAwesome:FontAwesomeIcons.Pencil}" />
