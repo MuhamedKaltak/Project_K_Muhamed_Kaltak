@@ -16,7 +16,7 @@ namespace Project_K.ViewModel
 {
     public partial class RegisterViewModel : BaseViewModel
     {
-        DatabaseUserService databaseUserService;
+        DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework;
         SecurityService securityService;
         EmailService emailService;
 
@@ -37,10 +37,10 @@ namespace Project_K.ViewModel
         private byte[] profilePicture { get; set; }
 
 
-        public RegisterViewModel(DatabaseUserService databaseUserService,SecurityService securityService, EmailService emailService ,IMediaPicker mediaPicker)
+        public RegisterViewModel(DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework, SecurityService securityService, EmailService emailService ,IMediaPicker mediaPicker)
         {
             Title = "Register a new account";
-            this.databaseUserService = databaseUserService;
+            this.databaseUserServiceEntityFramework = databaseUserServiceEntityFramework;
             this.securityService = securityService;
             this.emailService = emailService;
             this.mediaPicker = mediaPicker;
@@ -67,16 +67,16 @@ namespace Project_K.ViewModel
 
             if (!await emailService.CheckEmailFormat(email))
             {
-                await UINotification.DisplayAlertMessage("ERROR", "The email provided is in an incorrect format, should be in this format -> (abc.def.se)","OK");
+                await UINotification.DisplayAlertMessage("ERROR", "The email provided is in an incorrect format, should be in this format -> (abc.def.se)", "OK");
                 return;
             }
 
-            if(await databaseUserService.CheckExistingUserByEmail(email))
+            if (await databaseUserServiceEntityFramework.CheckExistingUserByEmail(email))
             {
                 await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
                 return;
             }
-            else if (await databaseUserService.CheckExistingUserByUsername(username))
+            else if (await databaseUserServiceEntityFramework.CheckExistingUserByUsername(username))
             {
                 await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
                 return;
@@ -87,7 +87,7 @@ namespace Project_K.ViewModel
                 IsBusy = true;
 
                 var salt = await securityService.GenerateRandomSalt(16);
-                var hashedPassword = await securityService.Hash(password,salt);
+                var hashedPassword = await securityService.Hash(password, salt);
 
                 User user = new User
                 {
@@ -100,7 +100,7 @@ namespace Project_K.ViewModel
                     ProfilePicture = profilePicture
                 };
 
-                await databaseUserService.AddUser(user);
+                await databaseUserServiceEntityFramework.AddUser(user);
 
                 await NavigateBackToPreviousPage();
 

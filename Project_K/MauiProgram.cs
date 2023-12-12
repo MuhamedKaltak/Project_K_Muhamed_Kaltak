@@ -30,7 +30,9 @@ namespace Project_K
             builder.Services.AddTransient<SecurityService>();
             builder.Services.AddTransient<EmailService>();
 
+
             builder.Services.AddSingleton<DatabaseUserService>();
+            builder.Services.AddSingleton<DatabaseUserServiceEntityFramework>();
             builder.Services.AddSingleton<UserService>();
 
 

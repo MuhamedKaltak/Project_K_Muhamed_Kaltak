@@ -10,6 +10,8 @@ namespace Project_K.Utilities
     {
         public const string DatabaseFilename = "Project_K_SQLite.db3";
 
+        public const string SqlServerConnectionString = @"Data Source=(localdb)\Local;Initial Catalog=B;Integrated Security=True;Pooling=False";
+
         public const SQLite.SQLiteOpenFlags Flags =
             // open the database in read/write mode
             SQLite.SQLiteOpenFlags.ReadWrite |
