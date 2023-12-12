@@ -21,6 +21,8 @@ namespace Project_K.Services
                 SQLitePCL.Batteries_V2.Init();
 
                 Database.MigrateAsync();
+
+                Initialized = true;
             }
             
         }
