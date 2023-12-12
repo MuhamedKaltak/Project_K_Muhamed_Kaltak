@@ -12,26 +12,34 @@ namespace Project_K.Services
     {
         public DbSet<User> Users { get; set; }
 
+        private bool Initialized = false;
+
         public Context()
         {
+            if (!Initialized)
+            {
+                SQLitePCL.Batteries_V2.Init();
 
-        }
-
-        public Context(DbContextOptions<Context> options)
-        {
-
-            SQLitePCL.Batteries_V2.Init();
-
-            Database.MigrateAsync();
+                Database.MigrateAsync();
+            }
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\Local;Initial Catalog=Project_K_DB;Integrated Security=True;Pooling=False");
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            
+            string dbPath;
+
+            if (OperatingSystem.IsWindows())
+            {
+                dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Project_K_DB.db3"); //Gets stored on your "MyDocuments" folder
+            }
+            else
+            {
+                dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Project_K_DB.db3");
+            }
+
+            optionsBuilder
+                .UseSqlite($"Filename={dbPath}");
         }
     }
 }
