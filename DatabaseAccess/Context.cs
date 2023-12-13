@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Project_K.Model;
-using System;
+﻿using DatabaseAccess.Model;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_K.Services
+namespace DatabaseAccess
 {
     public class Context : DbContext
     {
@@ -18,7 +17,8 @@ namespace Project_K.Services
         {
             if (!Initialized)
             {
-                SQLitePCL.Batteries_V2.Init();
+                if(OperatingSystem.IsIOS()) //Behövs för att initiera SQLite i iOS
+                    SQLitePCL.Batteries_V2.Init();
 
                 Database.MigrateAsync();
 

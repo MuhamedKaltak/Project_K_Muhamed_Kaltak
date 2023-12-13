@@ -20,10 +20,10 @@ namespace Project_K.Services
 
             Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
-            await Database.CreateTableAsync<User>();
+            await Database.CreateTableAsync<UserOld>();
         }
 
-        public async Task AddUser(User user)
+        public async Task AddUser(UserOld user)
         {
             await Init();
 
@@ -34,22 +34,22 @@ namespace Project_K.Services
 
 
 
-        public async Task<User> GetUserByUsername(string username)
+        public async Task<UserOld> GetUserByUsername(string username)
         {
             await Init();
 
-            return await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+            return await Database.Table<UserOld>().FirstOrDefaultAsync(u => u.Username == username);
         }
 
-        public async Task<User> GetUserByEmail(string email)
+        public async Task<UserOld> GetUserByEmail(string email)
         {
             await Init();
 
-            return await Database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
+            return await Database.Table<UserOld>().FirstOrDefaultAsync(u => u.Email == email);
         }
 
 
-        public async Task UpdateUser(User user)
+        public async Task UpdateUser(UserOld user)
         {
             await Init();
 
@@ -62,7 +62,7 @@ namespace Project_K.Services
         {
             await Init();
 
-            var user = await Database.Table<User>().FirstOrDefaultAsync(u => u.Email == email);
+            var user = await Database.Table<UserOld>().FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
                 return false;
@@ -74,7 +74,7 @@ namespace Project_K.Services
         {
             await Init();
 
-            var user = await Database.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+            var user = await Database.Table<UserOld>().FirstOrDefaultAsync(u => u.Username == username);
 
             if (user == null)
                 return false;

@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DatabaseAccess;
+using DatabaseAccess.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.ApplicationModel.Communication;
-using Project_K.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

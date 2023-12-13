@@ -29,9 +29,9 @@ namespace Project_K.ViewModel
         ImageSource profileImage;
 
         [ObservableProperty]
-        User user;
+        UserOld user;
 
-        private User originalUserData;
+        private UserOld originalUserData;
 
         public string enteredPassword {  get; set; }
         public string newPassword {  get; set; }
@@ -543,10 +543,10 @@ namespace Project_K.ViewModel
             
         }
 
-        private User DeepCopy(User source)
+        private UserOld DeepCopy(UserOld source)
         {
             var json = JsonSerializer.Serialize(source);
-            return JsonSerializer.Deserialize<User>(json);
+            return JsonSerializer.Deserialize<UserOld>(json);
         }
 
         [RelayCommand]

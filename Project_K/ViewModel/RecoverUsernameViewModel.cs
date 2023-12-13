@@ -30,7 +30,7 @@ namespace Project_K.ViewModel
             if (IsBusy || !await UINotification.CheckValidField(new List<string> { email }))
                 return;
 
-            User user = await databaseUserService.GetUserByEmail(email);
+            UserOld user = await databaseUserService.GetUserByEmail(email);
 
             if (user == null)
             {

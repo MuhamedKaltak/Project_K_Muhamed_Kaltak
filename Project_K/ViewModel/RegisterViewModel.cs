@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DatabaseAccess;
+using DatabaseAccess.Model;
 using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;

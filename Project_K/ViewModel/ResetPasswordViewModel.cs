@@ -20,7 +20,7 @@ namespace Project_K.ViewModel
         SecurityService securityService;
 
         [ObservableProperty]
-        User user;
+        UserOld user;
 
         public string email {  get; set; }
         public string token {  get; set; }
@@ -42,7 +42,7 @@ namespace Project_K.ViewModel
         }
 
         [RelayCommand]
-        public async Task NavigateToResetPasswordTokenPage(User user)
+        public async Task NavigateToResetPasswordTokenPage(UserOld user)
         {
             await Shell.Current.GoToAsync($"{nameof(ResetPasswordTokenPage)}", true,
             new Dictionary<string, object>
@@ -52,7 +52,7 @@ namespace Project_K.ViewModel
         }
 
         [RelayCommand]
-        public async Task NavigateToResetPasswordPage(User user)
+        public async Task NavigateToResetPasswordPage(UserOld user)
         {
             await Shell.Current.GoToAsync($"{nameof(ResetPasswordPage)}", true,
             new Dictionary<string, object>

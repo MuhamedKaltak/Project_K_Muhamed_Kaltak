@@ -9,6 +9,6 @@ namespace Project_K.Services
 {
     public class UserService
     {
-        public User user {  get; set; }
+        public UserOld user {  get; set; }
     }
 }

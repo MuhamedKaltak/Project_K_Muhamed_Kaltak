@@ -73,14 +73,14 @@ namespace Project_K.Services
             
         }
 
-        public async Task<bool> VerifyPassword(User user, string password)
+        public async Task<bool> VerifyPassword(UserOld user, string password)
         {
             string hashedPassword = await Hash(password, user.Salt);
 
             return hashedPassword == user.Password;
         }
 
-        public async Task<bool> VerifyToken(User user, string enteredToken)
+        public async Task<bool> VerifyToken(UserOld user, string enteredToken)
         {
             TimeSpan timeSpan = DateTime.Now - user.ResetDate;
 
