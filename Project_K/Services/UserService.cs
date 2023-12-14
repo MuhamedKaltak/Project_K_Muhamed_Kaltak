@@ -1,4 +1,4 @@
-﻿using Project_K.Model;
+﻿using DatabaseAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace Project_K.Services
 {
     public class UserService
     {
-        public UserOld user {  get; set; }
+        public User user {  get; set; }
     }
 }

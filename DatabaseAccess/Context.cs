@@ -17,12 +17,13 @@ namespace DatabaseAccess
         {
             if (!Initialized)
             {
-                if(OperatingSystem.IsIOS()) //Behövs för att initiera SQLite i iOS
+                Initialized = true;
+
+                if (OperatingSystem.IsIOS()) //Behövs för att initiera SQLite i iOS
                     SQLitePCL.Batteries_V2.Init();
 
                 Database.MigrateAsync();
 
-                Initialized = true;
             }
             
         }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using DatabaseAccess.Model;
 using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
@@ -12,15 +13,15 @@ namespace Project_K.ViewModel
 {
     public partial class RecoverUsernameViewModel : BaseViewModel
     {
-        DatabaseUserService databaseUserService;
+        DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework;
         EmailService emailService;
 
         public string email {  get; set; }
 
-        public RecoverUsernameViewModel(DatabaseUserService databaseUserService,EmailService emailService)
+        public RecoverUsernameViewModel(DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework, EmailService emailService)
         {
             Title = "Username Recovery";
-            this.databaseUserService = databaseUserService;
+            this.databaseUserServiceEntityFramework = databaseUserServiceEntityFramework;
             this.emailService = emailService;
         }
 
@@ -30,7 +31,7 @@ namespace Project_K.ViewModel
             if (IsBusy || !await UINotification.CheckValidField(new List<string> { email }))
                 return;
 
-            UserOld user = await databaseUserService.GetUserByEmail(email);
+            User user = await databaseUserServiceEntityFramework.GetUserByEmail(email);
 
             if (user == null)
             {

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
 using Project_K.View;
@@ -14,7 +13,7 @@ namespace Project_K.ViewModel
 {
     public partial class LoginViewModel : BaseViewModel
     {
-        DatabaseUserService databaseUserService;
+        DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework;
         SecurityService securityService;
         UserService userService;
 
@@ -23,9 +22,9 @@ namespace Project_K.ViewModel
 
         private const string ADMIN_USERNAME_PASSWORD = "admin";
 
-        public LoginViewModel(DatabaseUserService databaseUserService,SecurityService securityService,UserService userService)
+        public LoginViewModel(DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework, SecurityService securityService,UserService userService)
         {
-            this.databaseUserService = databaseUserService;
+            this.databaseUserServiceEntityFramework = databaseUserServiceEntityFramework;
             this.securityService = securityService;
             this.userService = userService;
         }
@@ -61,7 +60,7 @@ namespace Project_K.ViewModel
             {
                 IsBusy = true;
 
-                var user = await databaseUserService.GetUserByUsername(username);
+                var user = await databaseUserServiceEntityFramework.GetUserByUsername(username);
 
                 if (user == null)
                 {

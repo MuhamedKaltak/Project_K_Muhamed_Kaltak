@@ -91,7 +91,7 @@ namespace Project_K.ViewModel
                 var salt = await securityService.GenerateRandomSalt(16);
                 var hashedPassword = await securityService.Hash(password, salt);
 
-                User user = new User
+                DatabaseAccess.Model.User user = new DatabaseAccess.Model.User
                 {
                     Username = username,
                     Password = hashedPassword,

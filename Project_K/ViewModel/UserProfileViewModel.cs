@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DatabaseAccess.Model;
 using Microsoft.Maui.ApplicationModel.Communication;
 using Project_K.Model;
 using Project_K.Services;
@@ -18,7 +19,7 @@ namespace Project_K.ViewModel
 {
     public partial class UserProfileViewModel : BaseViewModel
     {
-        DatabaseUserService databaseUserService;
+        DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework;
         UserService userService;
         SecurityService securityService;
         EmailService emailService;
@@ -29,9 +30,9 @@ namespace Project_K.ViewModel
         ImageSource profileImage;
 
         [ObservableProperty]
-        UserOld user;
+        User user;
 
-        private UserOld originalUserData;
+        private User originalUserData;
 
         public string enteredPassword {  get; set; }
         public string newPassword {  get; set; }
@@ -62,10 +63,10 @@ namespace Project_K.ViewModel
 
         private byte[] picture { get; set; }
 
-        public UserProfileViewModel(DatabaseUserService databaseUserService, UserService userService, SecurityService securityService, EmailService emailService, IMediaPicker mediaPicker)
+        public UserProfileViewModel(DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework, UserService userService, SecurityService securityService, EmailService emailService, IMediaPicker mediaPicker)
         {
             Title = "UserProfile";
-            this.databaseUserService = databaseUserService;
+            this.databaseUserServiceEntityFramework = databaseUserServiceEntityFramework;
             this.userService = userService;
             this.securityService = securityService;
             this.mediaPicker = mediaPicker;
@@ -96,7 +97,7 @@ namespace Project_K.ViewModel
 
             User.ProfilePicture = picture;
 
-            await databaseUserService.UpdateUser(User);
+            await databaseUserServiceEntityFramework.UpdateUser(User);
 
             ImageToShowTabBar = ImageSource.FromStream(() => new MemoryStream(picture));
 
@@ -120,7 +121,7 @@ namespace Project_K.ViewModel
             if (!await UINotification.CheckValidField(new List<string> { User.LastName }))
                 return;
 
-            if (await databaseUserService.CheckExistingUserByUsername(User.Username))
+            if (await databaseUserServiceEntityFramework.CheckExistingUserByUsername(User.Username))
             {
                 await Shell.Current.DisplayAlert("ERROR", "The username provied already exists in the system, please choose a different username", "OK");
                 return;
@@ -319,7 +320,7 @@ namespace Project_K.ViewModel
                 User.ResetToken = await securityService.Hash(token, User.Salt);
                 User.ResetDate = DateTime.Now;
 
-                await databaseUserService.UpdateUser(User);
+                await databaseUserServiceEntityFramework.UpdateUser(User);
 
                 await UINotification.DisplayAlertMessage("Email Sent", $"Email with a token will be sent to {User.Email}", "OK");
 
@@ -359,7 +360,7 @@ namespace Project_K.ViewModel
                 {
                     User.ResetToken = "";
 
-                    await databaseUserService.UpdateUser(User);
+                    await databaseUserServiceEntityFramework.UpdateUser(User);
                     await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
                     await NavigateToUserProfilePage();
                 }
@@ -399,7 +400,7 @@ namespace Project_K.ViewModel
                 return;
             }
 
-            if (await databaseUserService.CheckExistingUserByEmail(enteredEmail))
+            if (await databaseUserServiceEntityFramework.CheckExistingUserByEmail(enteredEmail))
             {
                 await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
                 return;
@@ -416,7 +417,7 @@ namespace Project_K.ViewModel
 
                 User.ResetDate = DateTime.Now;
 
-                await databaseUserService.UpdateUser(User);
+                await databaseUserServiceEntityFramework.UpdateUser(User);
 
                 await NavigateToChangeEmailNewEmailTokenPage();
             }
@@ -447,7 +448,7 @@ namespace Project_K.ViewModel
                 {
                     User.ResetToken = "";
 
-                    await databaseUserService.UpdateUser(User);
+                    await databaseUserServiceEntityFramework.UpdateUser(User);
                     await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
                     await NavigateToUserProfilePage();
                 }
@@ -519,7 +520,7 @@ namespace Project_K.ViewModel
             {
                 IsBusy = true;
 
-                await databaseUserService.UpdateUser(User);
+                await databaseUserServiceEntityFramework.UpdateUser(User);
 
                 await UINotification.DisplayAlertMessage("Updated Data", $"Succesfully updated your account details", "OK");
 
@@ -543,10 +544,10 @@ namespace Project_K.ViewModel
             
         }
 
-        private UserOld DeepCopy(UserOld source)
+        private User DeepCopy(User source)
         {
             var json = JsonSerializer.Serialize(source);
-            return JsonSerializer.Deserialize<UserOld>(json);
+            return JsonSerializer.Deserialize<User>(json);
         }
 
         [RelayCommand]
