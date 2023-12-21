@@ -90,13 +90,7 @@
 	  <MauiXaml Update="AppShellLogin.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\ChangeEmailCurrentEmailTokenPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\ChangeEmailNewEmailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\ChangeEmailNewEmailTokenPage.xaml">
+	  <MauiXaml Update="View\ChangeEmailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ChangePasswordPage.xaml">

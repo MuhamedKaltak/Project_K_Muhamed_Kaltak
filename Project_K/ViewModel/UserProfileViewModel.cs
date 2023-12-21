@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using DatabaseAccess.Model;
 using Microsoft.Maui.ApplicationModel.Communication;
+using Project_K.Messages;
 using Project_K.Model;
 using Project_K.Services;
 using Project_K.Utilities;
@@ -17,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Project_K.ViewModel
 {
-    public partial class UserProfileViewModel : BaseViewModel
+    public partial class UserProfileViewModel : BaseViewModel, IRecipient<UpdateUserItemMessage>
     {
         DatabaseUserServiceEntityFramework databaseUserServiceEntityFramework;
         UserService userService;
@@ -84,6 +86,8 @@ namespace Project_K.ViewModel
             {
                 ImageToShowTabBar = ImageSource.FromStream(() => new MemoryStream(User.ProfilePicture));
             }
+
+            WeakReferenceMessenger.Default.Register<UpdateUserItemMessage>(this); //Subbat till messagen
         }
 
         [RelayCommand]
@@ -221,19 +225,9 @@ namespace Project_K.ViewModel
             await Shell.Current.GoToAsync($"{nameof(ChangePasswordPage)}",true);
         }
 
-        async Task NavigateToChangeEmailCurrentEmailTokenPage()
+        async Task NavigateToChangeEmailPage()
         {
-            await Shell.Current.GoToAsync($"{nameof(ChangeEmailCurrentEmailTokenPage)}",true);
-        }
-
-        async Task NavigateToChangeEmailNewEmailPage()
-        {
-            await Shell.Current.GoToAsync($"{nameof(ChangeEmailNewEmailPage)}", true);
-        }
-
-        async Task NavigateToChangeEmailNewEmailTokenPage()
-        {
-            await Shell.Current.GoToAsync($"{nameof(ChangeEmailNewEmailTokenPage)}", true);
+            await Shell.Current.GoToAsync($"{nameof(ChangeEmailPage)}", true);
         }
 
         [RelayCommand]
@@ -324,7 +318,7 @@ namespace Project_K.ViewModel
 
                 await UINotification.DisplayAlertMessage("Email Sent", $"Email with a token will be sent to {User.Email}", "OK");
 
-                await NavigateToChangeEmailCurrentEmailTokenPage();
+                await NavigateToChangeEmailPage();
 
                 IsBusy = false;
 
@@ -341,151 +335,7 @@ namespace Project_K.ViewModel
             {
                 IsBusy = false;
             }
-          
-        }
 
-        [RelayCommand]
-        async Task VerifyCurrentEmailToken()
-        {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredToken }))
-                return;
-
-            try
-            {
-                IsBusy = true;
-
-                TimeSpan timeSpan = DateTime.Now - User.ResetDate;
-
-                if (timeSpan.Minutes >= 5)
-                {
-                    User.ResetToken = "";
-
-                    await databaseUserServiceEntityFramework.UpdateUser(User);
-                    await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
-                    await NavigateToUserProfilePage();
-                }
-
-                if (await securityService.VerifyToken(User,enteredToken))
-                {
-                    enteredToken = "";
-                    await NavigateToChangeEmailNewEmailPage();
-
-                }
-                else
-                {
-                    await UINotification.DisplayAlertMessage("Invalid token", $"The token provided is not valid", "OK");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        [RelayCommand]
-        async Task VerifyNewEmail()
-        {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredEmail }))
-                return;
-
-            if (!await emailService.CheckEmailFormat(enteredEmail))
-            {
-                await UINotification.DisplayAlertMessage("ERROR", "The email provided is not in a correct format. Example on correct format -> (abc@abc.se)", "OK");
-                return;
-            }
-
-            if (await databaseUserServiceEntityFramework.CheckExistingUserByEmail(enteredEmail))
-            {
-                await Shell.Current.DisplayAlert("ERROR", "The email provied already exists in the system", "OK");
-                return;
-            }
-
-            try
-            {
-                IsBusy = true;
-
-                var token = await securityService.GenerateToken();
-                User.ResetToken = await securityService.Hash(token, User.Salt);
-
-                await emailService.SendEmail(enteredEmail, "Change Email", $"Your email reset token : {token}. The validity of the token expires in five minutes");
-
-                User.ResetDate = DateTime.Now;
-
-                await databaseUserServiceEntityFramework.UpdateUser(User);
-
-                await NavigateToChangeEmailNewEmailTokenPage();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        [RelayCommand]
-        async Task VerifyNewEmailToken()
-        {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredToken }))
-                return;
-
-            try
-            {
-                IsBusy = true;
-
-                TimeSpan timeSpan = DateTime.Now - User.ResetDate;
-
-                if (timeSpan.Minutes >= 5)
-                {
-                    User.ResetToken = "";
-
-                    await databaseUserServiceEntityFramework.UpdateUser(User);
-                    await UINotification.DisplayAlertMessage("ERROR", $"ERROR: Token has expired, navigating back to profile page", "OK");
-                    await NavigateToUserProfilePage();
-                }
-
-                if (await securityService.VerifyToken(User, enteredToken))
-                {
-                    enteredToken = "";
-                    User.ResetToken = "";
-
-                    User.Email = enteredEmail;
-
-                    var oldEmail = originalUserData.Email;
-
-                    IsBusy = false;
-
-                    await UpdateUserDetails();
-
-                    await NavigateToUserProfilePage();
-
-                    await emailService.SendEmail(oldEmail, "Email has been changed", "The email associated with your account in Project_K has been changed, if this was not you then contact support immediately.");
-                }
-                else
-                {
-                    await UINotification.DisplayAlertMessage("Invalid token", $"The token provided is not valid", "OK");
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-            
         }
 
         [RelayCommand]
@@ -556,5 +406,13 @@ namespace Project_K.ViewModel
             TabBarRefreshImage_WorkAround();
         }
 
+        public void Receive(UpdateUserItemMessage message)
+        {
+            OnPropertyChanged(nameof(User));
+
+            // I'm using a pub/sub system because it's not sufficient for the OnPropertyChanged event to trigger when the Users value changes in, for example, - 
+            // - ChangeEmailViewModel (which refers to UserService.user) where the email gets changed the OnPropertyChanged is not fired automatically as
+            // - it needs to be explicitly called for data binding changes to be reflected.
+        }
     }
 }
