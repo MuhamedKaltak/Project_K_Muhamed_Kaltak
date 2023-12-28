@@ -9,7 +9,6 @@ namespace Project_K
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(UserProfilePage),typeof(UserProfilePage));
-            Routing.RegisterRoute(nameof(ChangePasswordSecurityCheckPage),typeof(ChangePasswordSecurityCheckPage));
             Routing.RegisterRoute(nameof(ChangePasswordPage),typeof(ChangePasswordPage));
             Routing.RegisterRoute(nameof(ChangeEmailPage),typeof(ChangeEmailPage));
         }

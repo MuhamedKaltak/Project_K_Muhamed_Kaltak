@@ -4,11 +4,10 @@ namespace Project_K.View;
 
 public partial class ChangePasswordPage : ContentPage
 {
-	public ChangePasswordPage(UserProfileViewModel userProfileViewModel)
+	public ChangePasswordPage(ChangePasswordViewModel changePasswordViewModel)
 	{
 		InitializeComponent();
 
-		BindingContext = userProfileViewModel;
-
+		BindingContext = changePasswordViewModel;
     }
 }

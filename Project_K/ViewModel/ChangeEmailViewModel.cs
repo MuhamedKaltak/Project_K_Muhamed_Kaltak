@@ -56,15 +56,8 @@ namespace Project_K.ViewModel
         }
 
         [RelayCommand]
-        public async Task Test()
-        {
-            WeakReferenceMessenger.Default.Send(new UpdateUserItemMessage("test@gmail.com"));
-        }
-
-        [RelayCommand]
         public async Task ChangeEmail()
         {
-
             switch (true)
             {
                 case var _ when EnterTokenForCurrentEmail: // I C# 7.0+ så kan man göra switch cases med bool values så här
@@ -84,8 +77,6 @@ namespace Project_K.ViewModel
                     await NavigateBackToPreviousPage();
                     break;
             }
-
-            
         }
 
         private void NextState(string newPlaceholderValue)
@@ -242,6 +233,8 @@ namespace Project_K.ViewModel
                     WeakReferenceMessenger.Default.Send(new UpdateUserItemMessage("Email has been updated"));
 
                     await NavigateBackToPreviousPage();
+
+                    await UINotification.DisplayAlertMessage("Email has been changed", "Your email has now been changed", "OK");
 
                     await emailService.SendEmail(oldEmail, "Email has been changed", "The email associated with your account in Project_K has been changed, if this was not you then contact support immediately.");
                 }

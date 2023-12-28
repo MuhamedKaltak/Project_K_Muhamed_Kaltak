@@ -209,17 +209,6 @@ namespace Project_K.ViewModel
         }
 
         [RelayCommand]
-        async Task NavigateToChangePasswordSecurityCheckPage()
-        {
-            await Shell.Current.GoToAsync($"{nameof(ChangePasswordSecurityCheckPage)}",true);
-        }
-
-        [RelayCommand]
-        async Task NavigateToUserProfilePage()
-        {
-            await Shell.Current.GoToAsync($"{nameof(UserProfilePage)}",true);
-        }
-
         async Task NavigateToChangePasswordPage()
         {
             await Shell.Current.GoToAsync($"{nameof(ChangePasswordPage)}",true);
@@ -228,75 +217,6 @@ namespace Project_K.ViewModel
         async Task NavigateToChangeEmailPage()
         {
             await Shell.Current.GoToAsync($"{nameof(ChangeEmailPage)}", true);
-        }
-
-        [RelayCommand]
-        async Task PasswordSecurityCheck()
-        {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { enteredPassword }))
-                return;
-
-            try
-            {
-                IsBusy = true;
-
-                if (await securityService.VerifyPassword(User, enteredPassword))
-                {
-                    enteredPassword = "";
-                    await NavigateToChangePasswordPage();
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("ERROR", "Incorrect password, please try again", "OK");
-                    return;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        [RelayCommand]
-        async Task ChangePassword()
-        {
-            if (IsBusy || !await UINotification.CheckValidField(new List<string> { newPassword, confirmNewPassword }))
-                return;
-
-            try
-            {
-                IsBusy = true;
-
-                if (!newPassword.Equals(confirmNewPassword))
-                {
-                    await UINotification.DisplayAlertMessage("ERROR", $"The passwords do not match, please try again", "OK");
-                    return;
-                }
-
-                User.Password = await securityService.Hash(newPassword, User.Salt);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!", $"ERROR:  {ex.Message}", "OK");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-
-            if(await UpdateUserDetails())
-            {
-                await NavigateToUserProfilePage();
-                await emailService.SendEmail(User.Email, "Passwords have been changed", "The password associated with your account in Project_K has been changed, if this was not you then contact support immediately.");
-            }
-
         }
 
         [RelayCommand]

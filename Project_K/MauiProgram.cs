@@ -45,6 +45,7 @@ namespace Project_K
             builder.Services.AddTransient<UserProfileViewModel>(); 
             builder.Services.AddTransient<ProductCreationViewModel>(); 
             builder.Services.AddTransient<ChangeEmailViewModel>();
+            builder.Services.AddTransient<ChangePasswordViewModel>();
 
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterPage>();
@@ -52,7 +53,6 @@ namespace Project_K
             builder.Services.AddTransient<ResetPasswordEmailPage>();
             builder.Services.AddTransient<ResetPasswordTokenPage>();
             builder.Services.AddTransient<ResetPasswordPage>();
-            builder.Services.AddTransient<ChangePasswordSecurityCheckPage>();
             builder.Services.AddTransient<ChangePasswordPage>();
             builder.Services.AddTransient<ChangeEmailPage>();
             builder.Services.AddTransient<UserProfilePage>();

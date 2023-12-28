@@ -111,7 +111,7 @@
                     <Grid>
                         <Label Style="{StaticResource Label_Edit_FAS}">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NavigateToChangePasswordSecurityCheckPageCommand}" />
+                                <TapGestureRecognizer Command="{Binding NavigateToChangePasswordPageCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Grid>
