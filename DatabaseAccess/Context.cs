@@ -11,21 +11,13 @@ namespace DatabaseAccess
     {
         public DbSet<User> Users { get; set; }
 
-        private bool Initialized = false;
-
         public Context()
         {
-            if (!Initialized)
-            {
-                Initialized = true;
+            if (OperatingSystem.IsIOS()) //Behövs för att initiera SQLite i iOS
+                 SQLitePCL.Batteries_V2.Init();
 
-                if (OperatingSystem.IsIOS()) //Behövs för att initiera SQLite i iOS
-                    SQLitePCL.Batteries_V2.Init();
+            Database.MigrateAsync();
 
-                Database.MigrateAsync();
-
-            }
-            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
